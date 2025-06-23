@@ -16,7 +16,7 @@ async function init(){
     });
     let status = await checkLoginStatus();
     if(status){
-        getSiteAndDriveDetails();
+        // getSiteAndDriveDetails();
         addFormValidation();
         // embedPowerBIReport();
 
