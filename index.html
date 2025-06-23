@@ -1108,6 +1108,7 @@
         const msalInstance = new msal.PublicClientApplication(msalConfig);
         var siteId, driveId, tokenResponse;
         var authorId, accountName, email, access;
+        const splist = "Amazing Stories entries dev"
         var spItems = [];
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         
@@ -1728,7 +1729,7 @@
                 }
                 let submit = $(this).find('button[type="submit"]');
                 spinButton(submit);
-                let list = "Amazing Stories entries";
+                // let list = "Amazing Stories entries dev";
                 let data = {};
                 let attachments = [];
                 let form = $(this);
@@ -1817,8 +1818,7 @@
                     data["Classification"] = $('#classificationSelect').val();
                 }
                 console.log(data);
-                saveToSharePoint(list, data, attachments).then(()=>{
-                // saveToSharePointBatch(list, [data]).then(()=>{
+                saveToSharePoint(splist, data, attachments).then(()=>{
                     showModal("Success", "Entry submitted successfully.");
                     $('#newEntryForm')[0].reset(); // Reset the form fields
                     $('#recipientContainer').empty(); // Clear the recipient container
@@ -1861,7 +1861,7 @@
                 let submit = $(this).find('button[type="submit"]');
                 spinButton(submit);
                 let id = $('#updateId').val();
-                let list = "Amazing Stories entries";
+                // let list = "Amazing Stories entries dev";
                 let data = {};
                 let attachments = [];
                 let form = $(this);
@@ -1937,7 +1937,7 @@
                 let filteredFields = fields.filter(field => entryItem[field.name] !== field.value);
 
                 // return false;
-                updateSPItem("Amazing Stories entries", id, filteredFields).then(async ()=>{
+                updateSPItem(splist, id, filteredFields).then(async ()=>{
                     if(attachments.length > 0){
                         await addAttachments(id, attachments).then(()=>{
                             console.log("Attachments saved successfully.");
@@ -1946,7 +1946,7 @@
                         });
                     }
                     if(attachmentsToDelete.length > 0){
-                        await deleteAttachments("Amazing Stories entries", id, attachmentsToDelete).then(()=>{
+                        await deleteAttachments(splist, id, attachmentsToDelete).then(()=>{
                             console.log("Attachments deleted successfully.");
                             attachmentsToDelete.forEach(attachment => {
                                 // Remove the corresponding image from the preview container
@@ -2177,7 +2177,7 @@
                     {name: "Deleted", value: adjustedTime}
                 ];
                 showConfirmModal(`Are you sure you want to delete the entry <b>${title}</b>?`,()=>{
-                    updateSPItem("Amazing Stories entries", id, fields).then(()=>{
+                    updateSPItem(splist, id, fields).then(()=>{
                         showModal("Success", "Entry deleted successfully.");
                         entry.remove();
                     }).catch((error) => {
@@ -2217,7 +2217,7 @@
                 let fields = [{name: "Amplified", value: updateValue}];
                 $(this).attr('title', `Click to ${statusMessage[statusMessageIndex]} this entry.`)
                 showConfirmModal(`Are you sure you want to ${statusMessage[statusMessageIndex]} the entry <b>${title}</b>?`,()=>{
-                    updateSPItem("Amazing Stories entries", id, fields).then(()=>{
+                    updateSPItem(splist, id, fields).then(()=>{
                         showModal("Success", `Entry updated successfully.`);
                         // $(this).removeClass('text-theme text-theme2').addClass(color)
                         $(this).attr('data-amplified', updateValue);

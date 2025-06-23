@@ -226,7 +226,7 @@ async function getListWithSP_API(listName, fields=[], conditions=[], author = nu
                 filterQuery.push(`${cond.field} eq '${cond.value}'`);
             });
         }
-        if(listName == "Amazing Stories entries")
+        if(listName == splist)
             filterQuery.push("Is_x0020_Deleted eq false"); // Ensure we only get non-deleted items
 
         // Construct final request URL

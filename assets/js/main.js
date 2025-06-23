@@ -134,7 +134,7 @@ async function getEntryById(id){
         "Title","Year","Month","SUBSL","Account","Team","Individual","Recipients","Recipient_x0020_Emails","Worktype","Challenge","Help","Impact","Uniqueness","Outcome","Amplified",'Id','AuthorId', "Classification"
     ];
     let conditions = [{field:"ID", value: id}];
-    let data = await getListWithSP_API("Amazing Stories entries",fields,conditions);
+    let data = await getListWithSP_API(splist,fields,conditions);
     
     if(data.length > 0)
         return data[0]; // Return the first item
@@ -161,7 +161,7 @@ async function getAllEntriesByMonth(month){
         conditions.push({field:"SUBSL", value: access.subsl});
     }
     // conditions.push({field:"Is_x0020_Deleted", value: false});
-    getListWithSP_API("Amazing Stories entries",fields,conditions).then(data=>{
+    getListWithSP_API(splist,fields,conditions).then(data=>{
         if(data.length > 0)
             processListItems(data,month,sort); // Process the retrieved items
         else
@@ -190,7 +190,7 @@ async function getSelfEntriesByMonth(month){
     }
     
     // conditions.push({field:"Is_x0020_Deleted", value: false});
-    getListWithSP_API("Amazing Stories entries",fields,conditions,email).then(data=>{
+    getListWithSP_API(splist,fields,conditions,email).then(data=>{
         if(data.length > 0)
             processListItems(data,month,sort); // Process the retrieved items
         else
@@ -210,7 +210,7 @@ async function getOwnRecognition(month) {
         if(month != 'All'){
             conditions = [{field:"Month", value: month}];
         }
-        let data = await getListWithSP_API("Amazing Stories entries", fields, conditions);
+        let data = await getListWithSP_API(splist, fields, conditions);
         if (data && data.length > 0) {
             
             let fields = [
@@ -230,7 +230,7 @@ async function getOwnRecognition(month) {
             let filterQuery = ids.map(id => month !== 'All' ? `(ID eq ${id} and Month eq '${month}')` : `(ID eq ${id})`).join(' or ');
             let selectQuery = fields.join(',');
 
-            const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getByTitle('Amazing Stories entries')/items?$filter=${filterQuery}&$select=${selectQuery}`;
+            const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getByTitle('${splist}')/items?$filter=${filterQuery}&$select=${selectQuery}`;
             const token = await getSharePointToken();
             const response = await fetch(url, {
                 method: "GET",
@@ -332,7 +332,7 @@ function getAccountLogo(account){
 async function getAttachments(itemID) {
     try{
         const token = await getSharePointToken(); // Get a new token for SharePoint API
-        const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/Web/Lists/GetByTitle('Amazing Stories entries')/items(${itemID})/AttachmentFiles`, {
+        const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/Web/Lists/GetByTitle('${splist}')/items(${itemID})/AttachmentFiles`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
