@@ -398,6 +398,7 @@
                                             <option value="PM & PMO">PM & PMO</option>
                                             <option value="PM + EAO + SDEX">PM + EAO + SDEX</option>
                                             <option value="VPC">VPC</option>
+                                            <!-- <option value="C&I">C&I</option> -->
                                         </select>
                                         <div class="invalid-feedback">Please select SUB-SL.</div>
                                     </div>
@@ -488,7 +489,7 @@
                                 <div class="invalid-feedback">Please provide a valid team name.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateRecipientInput" class="mt-2">Recipient Names</label>
-                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="recipientNamesInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="recipientNamesInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <div class="d-flex">
                                     <input type="text " class="form-control" id="updateRecipientInput" placeholder="Search recipient...">
@@ -503,7 +504,7 @@
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <label class="mt-2">Individual / Team Recognition</label>
-                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="recognitionInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="recognitionInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <div class="d-flex">
                                     <div class="updateRecognitionPill px-2 text-center" id="updateRecognitionInput1Label">Individual</div>
@@ -558,26 +559,26 @@
                                 <div class="invalid-feedback">Please provide a valid type of work.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateBusinessChallengeInput" class="mt-2">Customer Challenge</label>
-                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="businessChallengeInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="businessChallengeInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>                
                                 <textarea class="form-control" id="updateBusinessChallengeInput" rows="4" required></textarea>
                                 <div class="invalid-feedback">Please provide a valid business challenge.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateBusinessImpactInput" class="mt-2">Customer Impact</label>
-                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="businessImpactInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="businessImpactInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <textarea class="form-control" id="updateBusinessImpactInput" rows="4" required></textarea>
                                 <div class="invalid-feedback">Please provide a valid business impact.</div>
                                 <div class="d-flex align-items-center mt-2">
                                     <input class="form-check-input me-2" type="checkbox" id="updateUniquenessTickbox">
                                     <label class="form-check-label" for="updateUniquenessTickbox">Add Uniqueness/Complexity</label>
-                                    <button title="Info" type="button" class="info-button bg-secondary-subtle" id="uniquenessInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button type="button" class="info-button bg-secondary-subtle" id="uniquenessInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <textarea class="form-control" id="updateUniquenessInput" rows="4"  style="display: none;"></textarea>
                                 <div class="invalid-feedback">Please provide a valid uniqueness/complexity.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateHowDXCHelpedInput" class="mt-2">How DXC Helped</label>
-                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="howDXCHelpedInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="howDXCHelpedInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <textarea class="form-control" id="updateHowDXCHelpedInput" rows="4" required></textarea>
                                 <div class="invalid-feedback">Please provide a valid description.</div>
@@ -1108,7 +1109,7 @@
         const msalInstance = new msal.PublicClientApplication(msalConfig);
         var siteId, driveId, tokenResponse;
         var authorId, accountName, email, access;
-        const splist = "Amazing Stories entries dev"
+        const splist = "Amazing Stories entries";
         var spItems = [];
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         
@@ -1259,50 +1260,6 @@
                     showModal("Notice", "You can only upload a maximum of "+maxUploads+" image(s). "+groupError);
                     return;
                 }
-                
-                // Loop through selected files
-                /* filesArray.forEach((file, index) => {
-                    if (file.type.startsWith('image/')) { // Ensure the file is an image
-                        const reader = new FileReader();
-                        const image = new Image();
-                        reader.onload = function(e) {
-                            image.onload = function () {
-                                const width = image.width;
-                                const height = image.height;
-                                console.log(`File: ${file.name} → Width: ${width}, Height: ${height}`);
-                                if( recipients > 4){
-                                    if(width < height){
-                                        groupError = "For more than 4 recipients, please upload <b>one</b> group image in landscape orientation.";
-                                    }else if(width / height < 1.5 || width / height > 2){
-                                        groupError = "For more than 4 recipients, please upload <b>one</b> group image with an aspect ratio between 1.5:1 and 2:1. For example, <b>1920x1080</b> or <b>1600x900</b>.";
-                                    }
-                                }
-                            };
-                            const div = document.createElement('div'); // Create a wrapper div
-                            div.classList.add('image-wrapper'); // Optional: Add a class for styling
-                            const img = document.createElement('img');
-                            image.src = e.target.result; // Set the image source
-                            img.src = e.target.result; // Set the image source
-                            const button = document.createElement('button'); // Create a button
-                            button.innerHTML = '<i class="fa-solid fa-xmark"></i>'; // Add the icon
-                            button.classList.add('remove-image-button');
-                            button.type = 'button';
-                            // Add click event to remove the preview and update the file list
-                            button.addEventListener('click', function() {
-                                filesArray.splice(index, 1); // Remove the file from the array
-                                div.remove(); // Remove the div from the preview container
-                                updateFileInput(filesArray,'recipientImages'); // Update the fileInput element
-                            });
-
-                            div.appendChild(img); // Append the image to the wrapper div
-                            div.appendChild(button); // Append the button to the wrapper div
-                            previewContainer.appendChild(div); // Add the image to the preview container
-                        };
-                        
-                        reader.readAsDataURL(file); // Read the file as a data URL
-                    }
-                });
- */
                 for (let index = 0; index < filesArray.length; index++) {
                     const file = filesArray[index];
                     if (file.type.startsWith('image/')) {
@@ -1729,7 +1686,7 @@
                 }
                 let submit = $(this).find('button[type="submit"]');
                 spinButton(submit);
-                // let list = "Amazing Stories entries dev";
+                let list = "Amazing Stories entries";
                 let data = {};
                 let attachments = [];
                 let form = $(this);
@@ -1861,7 +1818,7 @@
                 let submit = $(this).find('button[type="submit"]');
                 spinButton(submit);
                 let id = $('#updateId').val();
-                // let list = "Amazing Stories entries dev";
+                let list = "Amazing Stories entries";
                 let data = {};
                 let attachments = [];
                 let form = $(this);
@@ -2117,6 +2074,8 @@
                 }else{
                     $('#updateAccountDropdown').val('other');
                     $('#updateOtherAccountInput').val(account).show().prop('required', true).attr('aria-required', 'true').focus();
+                    $('#updateOtherAccountContainer').show();
+                    $('#updateOtherAccountInput').focus();
                 }
                 $('#updateTeamInput').val(team);
                 //make recipient pills per recipient

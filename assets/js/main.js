@@ -353,7 +353,7 @@ async function displayAttachments(itemID) {
     let html = "";
 
     attachments.forEach(file => {
-        html += `<img src="https://dxcportal.sharepoint.com${file.ServerRelativeUrl}" data-name="${file.FileName}" alt="Attachment" style="max-width: 200px; margin: 5px;">`;
+        html += `<img src="https://dxcportal.sharepoint.com${file.ServerRelativeUrl}" data-name="${file.FileName}" alt="It seems there is a problem with this image. Please upload a replacement." style="max-width: 200px; margin: 5px;">`;
     });
 
     document.getElementById("entryInfoImages").innerHTML = html;
