@@ -205,8 +205,8 @@ async function getFromSharePoint(listName, fields, conditions) {
 async function getListWithSP_API(listName, fields=[], conditions=[], author = null) {
     const token = await getSharePointToken();
     if (!token) {
-        throw new Error("Failed to obtain authentication token.");
         showModal("Error","Failed to obtain authentication token. Please refresh the page and try again.")
+        throw new Error("Failed to obtain authentication token.");
     };
 
     try {
