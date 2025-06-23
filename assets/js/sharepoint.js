@@ -106,12 +106,12 @@ async function getUserDetailsFromEmail(email) {
 async function userLevel(){
     const token = await getSharePointToken();
     if (!token) {
+        showModal("Error","Failed to obtain authentication token. Please refresh the page and try again.");
         throw new Error("Failed to obtain authentication token.");
-        showModal("Error","Failed to obtain authentication token. Please refresh the page and try again.")
     };
 
     try {
-        const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/GetByTitle('Amazing Stories POC List')/items?$filter=POCName/EMail eq '${email}'&$select=SUBSL/Title,POCName/Title,POCName/EMail,POCName/Id&$expand=SUBSL,POCName`;
+        const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/GetByTitle('Managers List')/items?$filter=POCName/EMail eq '${email}'&$select=SUBSL/Title,POCName/Title,POCName/EMail,POCName/Id&$expand=SUBSL,POCName`;
         const response = await fetch(url, {
             method: "GET",
             headers: {
@@ -146,102 +146,102 @@ async function userLevel(){
                 defaultaccess.type = 2; // SPOC
                 $('.super-element').remove();
                 //remove subsl options
-                        $("#subslDropdown option, #updateSubslDropdown option").not("[value='" + defaultaccess.subsl + "']").remove();
-                    }
-                    $('.spoc-element').removeClass("d-none");
-                }else{
-                    //remove everything
-                    $('.spoc-element').remove();
-                    $('.super-element').remove();
-                    $('.other-element').removeClass("d-none");
-                }
-                return defaultaccess; 
-
-            } catch (error) {
-                console.error("Error retrieving data from SharePoint:", error);
-                showModal("Error","Error retrieving data from SharePoint")
-                throw error;
+                $("#subslDropdown option, #updateSubslDropdown option").not("[value='" + defaultaccess.subsl + "']").remove();
             }
+            $('.spoc-element').removeClass("d-none");
+        }else{
+            //remove everything
+            $('.spoc-element').remove();
+            $('.super-element').remove();
+            $('.other-element').removeClass("d-none");
         }
-        async function getFormDigest() {
-            try {
-                const token = await getSharePointToken();
-                const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/contextinfo`, {
-                    method: "POST",
-                    headers: {
-                        "Accept": "application/json;odata=verbose",
-                        "Authorization": "Bearer "+token
-                    }
-                });
-                const data = await response.json();
-                return data.d.GetContextWebInformation.FormDigestValue;
-            } catch (error) {
-                console.error("Error fetching request digest: ", error);
-                return null;
+        return defaultaccess; 
+
+    } catch (error) {
+        console.error("Error retrieving data from SharePoint:", error);
+        showModal("Error","Error retrieving data from SharePoint.")
+        throw error;
+    }
+}
+async function getFormDigest() {
+    try {
+        const token = await getSharePointToken();
+        const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/contextinfo`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "Authorization": "Bearer "+token
             }
-        }
-        async function addAttachments(itemId, files) {
-            const siteUrl = "";  // Replace with your site URL
-            const listName = "YourListName";  // Replace with your list name
+        });
+        const data = await response.json();
+        return data.d.GetContextWebInformation.FormDigestValue;
+    } catch (error) {
+        console.error("Error fetching request digest: ", error);
+        return null;
+    }
+}
+async function addAttachments(itemId, files) {
+    const siteUrl = "";  // Replace with your site URL
+    const listName = "YourListName";  // Replace with your list name
 
-            try {
-                const formDigest = await getFormDigest();  // Ensure you have a valid form digest
+    try {
+        const formDigest = await getFormDigest();  // Ensure you have a valid form digest
 
-                for (const file of files) {
-                    const fileName = file.name;
-                    const token = await getSharePointToken();
-                    const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getbytitle('${splist}')/items(${itemId})/AttachmentFiles/add(FileName='${fileName}')`, {
-                        method: "POST",
-                        headers: {
-                            "Accept": "application/json;odata=verbose",
-                            "X-RequestDigest": formDigest,
-                            "Authorization": "Bearer "+token,
-                        },
-                        body: file
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Upload failed for ${fileName}: ${response.statusText}`);
-                        showModal("Error", `Upload failed for ${fileName}: ${response.statusText}`);
-                    }
-
-                    console.log(`Attachment uploaded successfully: ${fileName}`);
-                }
-            } catch (error) {
-                console.error("Error uploading attachments:", error);
-                showModal("Error", "Error uploading attachments: " + error.message);
-            }
-        }
-
-        async function deleteAttachments(listName, itemId, fileNames) {
-            const formDigest = await getFormDigest();
-            if (!formDigest) {
-                console.error("Could not retrieve request digest.");
-                return;
-            }
+        for (const file of files) {
+            const fileName = file.name;
             const token = await getSharePointToken();
-            for (let fileName of fileNames) {
-                let endpoint = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/GetByTitle('${listName}')/items(${itemId})/AttachmentFiles('${fileName}')`;
+            const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getbytitle('${splist}')/items(${itemId})/AttachmentFiles/add(FileName='${fileName}')`, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json;odata=verbose",
+                    "X-RequestDigest": formDigest,
+                    "Authorization": "Bearer "+token,
+                },
+                body: file
+            });
 
-                try {
-                    const response = await fetch(endpoint, {
-                        method: "DELETE",
-                        headers: {
-                            "Accept": "application/json;odata=verbose",
-                            "X-RequestDigest": formDigest,
-                            "IF-MATCH": "*",
-                            "X-HTTP-Method": "DELETE",
-                            "Authorization": "Bearer "+token
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Failed to delete ${fileName}: ${response.statusText}`);
-                    }
-
-                    console.log(`Deleted: ${fileName}`);
-                } catch (error) {
-                    console.error(`Error deleting attachment (${fileName}):`, error);
-                }
+            if (!response.ok) {
+                throw new Error(`Upload failed for ${fileName}: ${response.statusText}`);
+                showModal("Error", `Upload failed for ${fileName}: ${response.statusText}`);
             }
+
+            console.log(`Attachment uploaded successfully: ${fileName}`);
         }
+    } catch (error) {
+        console.error("Error uploading attachments:", error);
+        showModal("Error", "Error uploading attachments: " + error.message);
+    }
+}
+
+async function deleteAttachments(listName, itemId, fileNames) {
+    const formDigest = await getFormDigest();
+    if (!formDigest) {
+        console.error("Could not retrieve request digest.");
+        return;
+    }
+    const token = await getSharePointToken();
+    for (let fileName of fileNames) {
+        let endpoint = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/GetByTitle('${listName}')/items(${itemId})/AttachmentFiles('${fileName}')`;
+
+        try {
+            const response = await fetch(endpoint, {
+                method: "DELETE",
+                headers: {
+                    "Accept": "application/json;odata=verbose",
+                    "X-RequestDigest": formDigest,
+                    "IF-MATCH": "*",
+                    "X-HTTP-Method": "DELETE",
+                    "Authorization": "Bearer "+token
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to delete ${fileName}: ${response.statusText}`);
+            }
+
+            console.log(`Deleted: ${fileName}`);
+        } catch (error) {
+            console.error(`Error deleting attachment (${fileName}):`, error);
+        }
+    }
+}
