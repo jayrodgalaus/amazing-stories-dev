@@ -80,223 +80,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <!-- <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <form class="needs-validation" novalidate id="newEntryForm">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="monthDropdown" class="mt-2">Month</label>
-                                    <select class="form-select" id="monthDropdown" aria-describedby="monthDropdown" required>
-                                        <option value="January">January</option>
-                                        <option value="February">February</option>
-                                        <option value="March">March</option>
-                                        <option value="April">April</option>
-                                        <option value="May">May</option>
-                                        <option value="June">June</option>
-                                        <option value="July">July</option>
-                                        <option value="August">August</option>
-                                        <option value="September">September</option>
-                                        <option value="October">October</option>
-                                        <option value="November">November</option>
-                                        <option value="December">December</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label for="subslDropdown" class="mt-2">SUB-SL</label>
-                                    <select class="form-select" id="subslDropdown" aria-describedby="subslDropdown" required>
-                                        <option value="" disabled selected>--Select SUB-SL--</option>
-                                        <option value="AMS-EU">AMS-EU</option>
-                                        <option value="APJ-MEA">APJ-MEA</option>
-                                        <option value="CDM Shared">CDM Shared</option>
-                                        <option value="CIBC">CIBC</option>
-                                        <option value="EAO">EAO</option>
-                                        <option value="Network">Network</option>
-                                        <option value="PM & PMO">PM & PMO</option>
-                                        <option value="PM + EAO + SDEX">PM + EAO + SDEX</option>
-                                        <option value="VPC">VPC</option>
-                                        
-                                    </select>
-                                    <div class="invalid-feedback">Please select SUB-SL.</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="accountDropdown" class="mt-2">Account</label>
-                                    <select class="form-select" id="accountDropdown" aria-describedby="accountDropdown" required>
-                                        <option value="" disabled selected>--Select an account--</option>
-                                        <option value="AgGateway">AgGateway</option>
-                                        <option value="Airbus">Airbus</option>
-                                        <option value="Amcor">Amcor</option>
-                                        <option value="AON">AON</option>
-                                        <option value="AT&T">AT&T</option>
-                                        <option value="Audi">Audi</option>
-                                        <option value="Avanos">Avanos</option>
-                                        <option value="Aviva">Aviva Canada</option>
-                                        <option value="BOQ">Bank of Queensland</option>
-                                        <option value="Betafence">Betafence</option>
-                                        <option value="BlueScope">BlueScope Steel</option>
-                                        <option value="CIBC">Canadian Imperial Bank of Commerce</option>
-                                        <option value="Coca-Cola">Coca-Cola Beverages Philippines</option>
-                                        <option value="DirecTV">DirecTV</option>
-                                        <option value="Downer">Downer</option>
-                                        <option value="DXC Technology">DXC Technology</option>
-                                        <option value="Fischer">Fischer</option>
-                                        <option value="Glanbia">Glanbia</option>
-                                        <option value="Global Life Sciences Products and Services">Global Life Sciences Products and Services</option>
-                                        <option value="Hanes Brands Inc.">Hanes Brands Inc.</option>
-                                        <option value="HF Sinclair">HF Sinclair</option>
-                                        <option value="IAG">IAG</option>
-                                        <option value="Japan Tobacco Inc.">Japan Tobacco Inc.</option>
-                                        <option value="Jollibee Foods Corporation">Jollibee Foods Corporation</option>
-                                        <option value="Kraft Heinz">Kraft Heinz</option>
-                                        <option value="Leveraged">Leveraged</option>
-                                        <option value="Latitude Financial Services">Latitude Financial Services</option>
-                                        <option value="Macquarie">Macquarie</option>
-                                        <option value="Markem-Imaje">Markem-Imaje</option>
-                                        <option value="Medmix">Medmix</option>
-                                        <option value="Microsoft">Microsoft</option>
-                                        <option value="Nissan">Nissan</option>
-                                        <option value="ONE">Ocean Network Express</option>
-                                        <option value="Oceana">Oceana</option>
-                                        <option value="Origin">Origin Energy Services Limited</option>
-                                        <option value="Philips">Philips</option>
-                                        <option value="P&G">Proctor & Gamble</option>
-                                        <option value="Pilmico">Pilmico Foods Corporation</option>
-                                        <option value="Radisson">Radisson Hotel Group</option>
-                                        <option value="Ralph Lauren">Ralph Lauren</option>
-                                        <option value="Sabre">Sabre</option>
-                                        <option value="Serco">Serco</option>
-                                        <option value="Siam Cement Group">Siam Cement Group</option>
-                                        <option value="Sotheby's">Sotheby's</option>
-                                        <option value="South Australian Health">South Australian Health</option>
-                                        <option value="Sulzer">Sulzer</option>
-                                        <option value="ThyssenKrupp">ThyssenKrupp</option>
-                                        <option value="Toronto Dominion Bank">Toronto Dominion Bank</option>
-                                        <option value="Uniper">Uniper</option>
-                                        <option value="Valeo">Valeo</option>
-                                        <option value="Ventia">Ventia</option>
-                                        <option value="Western Sydney Airport">Western Sydney Airport</option>
-                                        <option value="Westpac">Westpac</option>
-                                        <option value="Whitehaven Coal">Whitehaven Coal</option>
-                                        <option value="W.L. Gore">W.L. Gore</option>
-                                        <option value="Worksafe Victoria">Worksafe Victoria</option>
-                                        <option value="other">Others &#40;please specify&#41;</option>
-                                    </select>
-                                    <div class="invalid-feedback">Please select an account.</div>
-                                    <div style="display: none;" id="otherAccountContainer">
-                                        <input type="text" class="form-control mt-2" id="otherAccountInput" placeholder="Please specify">
-                                        <div class="invalid-feedback">Please provide a valid account name.</div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label for="teamInput" class="mt-2">Team</label>
-                                    <input type="text" class="form-control" id="teamInput" required placeholder="Team name">
-                                    <div class="invalid-feedback">Please provide a valid team name.</div>
-                                </div>
-                            </div>
-                            <label for="classificationSelect" class="mt-2 spoc-element">Commendation Classification</label>
-                            <select class="form-select spoc-element" id="classificationSelect" aria-describedby="classificationSelect">
-                                <option selected value="C&I PH Commendation">C&I PH Commendation</option>
-                                <option value="Account Commendation">Account Commendation</option>
-                                <option value="Client Commendation">Client Commendation</option>
-                            </select>   
-                            <label for="entryInput" class="mt-2">Entry Title</label>
-                            <input type="text" class="form-control" id="entryInput" maxlength="64" placeholder="Maximum 64 characters" required>
-                            <div class="invalid-feedback">Please provide a valid entry title.</div>
-                            <label for="recipientInput" class="mt-2">Recipient Names</label>
-                            <div class="d-flex">
-                                <input type="text " class="form-control" id="recipientInput" placeholder="Search recipient...">
-                                <button class="btn btn-secondary ms-2" type="button" id="otherRecipientOption"><span class="small">Others</span></button>
-                            </div>
-                            
-                            <div id="recipientDropdown"></div>
-                            <div class="d-none" id="otherRecipientContainer">
-                                <input type="text" class="form-control mt-2" id="otherRecipientInput" placeholder="Name">
-                                <input type="email" class="form-control ms-2 mt-2" id="otherRecipientEmailInput" value="no.email@dxc.com" placeholder="Email">
-                                <button class="btn btn-primary ms-2 mt-2 small" type="button" id="addOtherRecipient">Add</button>
-                            </div>
-                            <div class="mt-2" id="recipientContainer"></div>
-                            <div class="d-flex align-items-center">
-                                <label class="mt-2">Individual / Team Recognition</label>
-                                <button type="button" class="info-button mt-2 bg-secondary-subtle" id="recognitionInfo"><i class="fa-solid fa-info"></i></button>
-                            </div>
-                            <div class="d-flex">
-                                <div class="recognitionPill px-2 text-center" id="recognitionInput1Label">Individual</div>
-                                <div class="recognitionPill px-2 text-center" id="recognitionInput2Label">Team</div>
-                                <input class="float-end" type="radio" name="recognitionInput" id="recognitionInput1" style="opacity: 0;pointer-events: none;">
-                                <input class="float-end" type="radio" name="recognitionInput" id="recognitionInput2" style="opacity: 0;pointer-events: none;">
-                            </div>
-                            
-                            <div class="d-flex align-items-center">
-                                <label for="recipientImages" class="mt-2">Recipient Images</label>
-                                <button type="button" class="info-button mt-2 bg-secondary-subtle" id="recipientImagesInfo"><i class="fa-solid fa-info"></i></button>
-                            </div>
-                            <input type="file" class="form-control" id="recipientImages" name="images" accept=".png, .jpg, .jpeg" multiple>
-                            <div id="previewContainer" class="preview-section mt-2 d-flex">
-                                
-                            </div>
-                            <label for="typeOfWork" class="mt-2">Type of Work</label>
-                            <select class="form-select" id="typeOfWork" aria-describedby="typeOfWork" required>
-                                <option value="" disabled selected>--Select type of work--</option>
-                                <option value="Automation">Automation</option>
-                                <option value="Backup">Backup</option>
-                                <option value="Change Management">Change Management</option>
-                                <option value="Change Implementation">Change Implementation</option>
-                                <option value="File Transfer">File Transfer</option>
-                                <option value="Go Live">Go Live</option>
-                                <option value="Hardware Refresh">Hardware Refresh</option>
-                                <option value="Incident Management">Incident Management</option>
-                                <option value="Innovation">Innovation</option>
-                                <option value="Migration cutover/ Rollout">Migration cutover/ Rollout</option>
-                                <option value="Network Monitoring">Network Monitoring</option>
-                                <option value="Operations Support">Operations Support</option>
-                                <option value="Patching">Patching</option>
-                                <option value="Problem Management">Problem Management</option>
-                                <option value="Project Implementation">Project Implementation</option>
-                                <option value="Project Management">Project Management</option>
-                                <option value="Server Build">Server Build</option>
-                                <option value="Storage Migration">Storage Migration</option>
-                                <option value="Systems Upgrade">Systems Upgrade</option>
-                                <option value="Vulnerability Management">Vulnerability Management</option>
-                                <option value="others">Others &#40;please specify&#41;</option>
-                            </select>
-                            <input type="text" class="form-control mt-2" id="otherTypeOfWorkInput" placeholder="Please specify" style="display: none;">
-                            <div class="invalid-feedback">Please provide a valid type of work.</div>
-                            <div class="d-flex align-items-center">
-                                <label for="businessChallengeInput" class="mt-2">Business Challenge</label>
-                                <button type="button" class="info-button mt-2 bg-secondary-subtle" id="businessChallengeInfo"><i class="fa-solid fa-info"></i></button>
-                            </div>                
-                            <textarea class="form-control" id="businessChallengeInput" rows="4" required></textarea>
-                            <div class="invalid-feedback">Please provide a valid business challenge.</div>
-                            <div class="d-flex align-items-center">
-                                <label for="businessImpactInput" class="mt-2">Business Impact</label>
-                                <button type="button" class="info-button mt-2 bg-secondary-subtle" id="businessImpactInfo"><i class="fa-solid fa-info"></i></button>
-                            </div>
-                            <textarea class="form-control" id="businessImpactInput" rows="4" required></textarea>
-                            <div class="invalid-feedback">Please provide a valid business impact.</div>
-                            <div class="d-flex align-items-center mt-2">
-                                <input class="form-check-input me-2" type="checkbox" id="uniquenessTickbox">
-                                <label class="form-check-label" for="uniquenessTickbox">Add Uniqueness/Complexity</label>
-                                <button type="button" class="info-button bg-secondary-subtle" id="uniquenessInfo"><i class="fa-solid fa-info"></i></button>
-                            </div>
-                            <textarea class="form-control" id="uniquenessInput" rows="4"  style="display: none;"></textarea>
-                            <div class="invalid-feedback">Please provide a valid uniqueness/complexity.</div>
-                            <div class="d-flex align-items-center">
-                                <label for="howDXCHelpedInput" class="mt-2">How DXC Helped</label>
-                                <button type="button" class="info-button mt-2 bg-secondary-subtle" id="howDXCHelpedInfo"><i class="fa-solid fa-info"></i></button>
-                            </div>
-                            <textarea class="form-control" id="howDXCHelpedInput" rows="4" required></textarea>
-                            <div class="invalid-feedback">Please provide a valid description.</div>
-                            
-                            
-                            
-                            <button type="submit" class="btn btn-primary float-end my-3">Submit</button>
-                        </form>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div> -->
             <div class="container">
                 <div class="d-flex justify-content-center w-100 mx-auto">
                     <form class="needs-validation w-50" novalidate id="newEntryForm">
@@ -615,7 +398,6 @@
                                             <option value="PM & PMO">PM & PMO</option>
                                             <option value="PM + EAO + SDEX">PM + EAO + SDEX</option>
                                             <option value="VPC">VPC</option>
-                                            <!-- <option value="C&I">C&I</option> -->
                                         </select>
                                         <div class="invalid-feedback">Please select SUB-SL.</div>
                                     </div>
@@ -706,7 +488,7 @@
                                 <div class="invalid-feedback">Please provide a valid team name.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateRecipientInput" class="mt-2">Recipient Names</label>
-                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="recipientNamesInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="recipientNamesInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <div class="d-flex">
                                     <input type="text " class="form-control" id="updateRecipientInput" placeholder="Search recipient...">
@@ -721,7 +503,7 @@
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <label class="mt-2">Individual / Team Recognition</label>
-                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="recognitionInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="recognitionInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <div class="d-flex">
                                     <div class="updateRecognitionPill px-2 text-center" id="updateRecognitionInput1Label">Individual</div>
@@ -776,26 +558,26 @@
                                 <div class="invalid-feedback">Please provide a valid type of work.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateBusinessChallengeInput" class="mt-2">Customer Challenge</label>
-                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="businessChallengeInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="businessChallengeInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>                
                                 <textarea class="form-control" id="updateBusinessChallengeInput" rows="4" required></textarea>
                                 <div class="invalid-feedback">Please provide a valid business challenge.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateBusinessImpactInput" class="mt-2">Customer Impact</label>
-                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="businessImpactInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="businessImpactInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <textarea class="form-control" id="updateBusinessImpactInput" rows="4" required></textarea>
                                 <div class="invalid-feedback">Please provide a valid business impact.</div>
                                 <div class="d-flex align-items-center mt-2">
                                     <input class="form-check-input me-2" type="checkbox" id="updateUniquenessTickbox">
                                     <label class="form-check-label" for="updateUniquenessTickbox">Add Uniqueness/Complexity</label>
-                                    <button type="button" class="info-button bg-secondary-subtle" id="uniquenessInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button title="Info" type="button" class="info-button bg-secondary-subtle" id="uniquenessInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <textarea class="form-control" id="updateUniquenessInput" rows="4"  style="display: none;"></textarea>
                                 <div class="invalid-feedback">Please provide a valid uniqueness/complexity.</div>
                                 <div class="d-flex align-items-center">
                                     <label for="updateHowDXCHelpedInput" class="mt-2">How DXC Helped</label>
-                                    <button type="button" class="info-button mt-2 bg-secondary-subtle" id="howDXCHelpedInfo"><i class="fa-solid fa-info"></i></button>
+                                    <button title="Info" type="button" class="info-button mt-2 bg-secondary-subtle" id="howDXCHelpedInfo"><i class="fa-solid fa-info"></i></button>
                                 </div>
                                 <textarea class="form-control" id="updateHowDXCHelpedInput" rows="4" required></textarea>
                                 <div class="invalid-feedback">Please provide a valid description.</div>
@@ -1317,9 +1099,9 @@
     <script>
         const msalConfig = {
             auth: {
-                clientId: "36fe1ccd-51e2-467a-ad6b-470f1bfeab6d", // Replace with your client ID
+                clientId: "2211ce0f-1187-409a-9c1d-baf8a0dd577f", // Replace with your client ID
                 authority: "https://login.microsoftonline.com/93f33571-550f-43cf-b09f-cd331338d086", // Replace with your tenant ID
-                redirectUri: "https://amazing-stories.vercel.app/" // Replace with your redirect URI
+                redirectUri: "https://amazing-stories-dev.vercel.app/" // Replace with your redirect URI
             }
 
         };
@@ -2302,24 +2084,6 @@
                 closebtn.attr('data-bs-target','#entryInfoCanvas').attr('aria-controls','entryInfoCanvas');
             })
             .on('click', '.entry-update', function() {
-                /* let entry = $(this).closest('.entry-card');
-                let id = entry.data('id');
-                let title = entry.data('title');
-                let year = entry.data('year');
-                let month = entry.data('month');
-                let subsl = entry.data('subsl');
-                let account = entry.data('account');
-                let team = entry.data('team'); 
-                let recognition = entry.data('recognition') ? "Individual" : "Team";
-                let recipients = entry.data('recipients').split('/ ');
-                let recipientHTML = "";
-                let worktype = entry.data('worktype');
-                let challenge = entry.data('challenge');
-                let help = entry.data('help');
-                let impact = entry.data('impact');
-                let uniqueness = entry.data('uniqueness') && entry.data('uniqueness').trim().length > 0 ? entry.data('uniqueness') : "";
-
-                */
                 $('#attachmentsToDelete').val("[]")
                 let id = $(this).attr('data-id');
                 let entryItem = spItems[id];
