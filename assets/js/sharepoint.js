@@ -111,7 +111,10 @@ async function userLevel(){
     };
 
     try {
-        const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/GetByTitle('Managers List')/items?$filter=POCName/EMail eq '${email}'&$select=SUBSL/Title,POCName/Title,POCName/EMail,POCName/Id&$expand=SUBSL,POCName`;
+        /* 1 = Super, 2 = SPOC, 3 = others */
+        let defaultaccess = {type: 3, subsl: "Others"};
+        const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/GetByTitle('Amazing Stories POC List')/items?$filter=POCName/EMail eq '${email}'&$select=SUBSL/Title,POCName/Title,POCName/EMail,POCName/Id&$expand=SUBSL,POCName`;
+        
         const response = await fetch(url, {
             method: "GET",
             headers: {
@@ -122,40 +125,45 @@ async function userLevel(){
         });
 
         if (!response.ok) {
-            throw new Error(`Error fetching from SharePoint: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        const items = result.d?.results || []; // Ensure we reference d.results
-
-        // Retrieve CreatedBy (AuthorId) details separately
-        const processedItems = await Promise.all(items.map(async item => {
-            return {
-                ...item, // Keep all direct properties
-            };
-        }));
-        /* 1 = Super, 2 = SPOC, 3 = others */
-        let defaultaccess = {type: 3, subsl: "Others"};
-        if(processedItems.length > 0){
-            let user = processedItems[0];
-            defaultaccess.subsl = user.SUBSL.Title;
-            if(defaultaccess.subsl == 'GIS'){
-                defaultaccess.type = 1; // Super Admin
-                $('.super-element').removeClass("d-none");
-            }else {
-                defaultaccess.type = 2; // SPOC
-                $('.super-element').remove();
-                //remove subsl options
-                $("#subslDropdown option, #updateSubslDropdown option").not("[value='" + defaultaccess.subsl + "']").remove();
-            }
-            $('.spoc-element').removeClass("d-none");
-        }else{
-            //remove everything
+            console.log(`No access to POC List`);
             $('.spoc-element').remove();
             $('.super-element').remove();
             $('.other-element').removeClass("d-none");
+            // throw new Error(`Error fetching from SharePoint: ${response.statusText}`);
+        }else{
+            const result = await response.json();
+            const items = result.d?.results || []; // Ensure we reference d.results
+
+            // Retrieve CreatedBy (AuthorId) details separately
+            const processedItems = await Promise.all(items.map(async item => {
+                return {
+                    ...item, // Keep all direct properties
+                };
+            }));
+            
+            if(processedItems.length > 0){
+                let user = processedItems[0];
+                defaultaccess.subsl = user.SUBSL.Title;
+                if(defaultaccess.subsl == 'GIS'){
+                    defaultaccess.type = 1; // Super Admin
+                    $('.super-element').removeClass("d-none");
+                }else {
+                    defaultaccess.type = 2; // SPOC
+                    $('.super-element').remove();
+                    //remove subsl options
+                    $("#subslDropdown option, #updateSubslDropdown option").not("[value='" + defaultaccess.subsl + "']").remove();
+                }
+                $('.spoc-element').removeClass("d-none");
+            }else{
+                //remove everything
+                $('.spoc-element').remove();
+                $('.super-element').remove();
+                $('.other-element').removeClass("d-none");
+            }
         }
+        
         return defaultaccess; 
+        
 
     } catch (error) {
         console.error("Error retrieving data from SharePoint:", error);
