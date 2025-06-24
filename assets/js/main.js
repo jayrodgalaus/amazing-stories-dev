@@ -199,7 +199,7 @@ async function getOwnRecognition(month) {
             let fields = [
                 "Title", "Year", "Month", "SUBSL", "Account", "Team", "Individual", 
                 "Recipients", "Recipient_x0020_Emails", "Worktype", "Challenge", "Help", 
-                "Impact", "Uniqueness", "Outcome", "Amplified", "Id", "AuthorId", "Classification", "Submitted_x0020_By", "Created"
+                "Impact", "Uniqueness", "Outcome", "Amplified", "Id", "AuthorId", "Classification", "Submitted_x0020_By", "Created", "Attachments"
             ];
             let filteredData = data.filter(item => item.Recipient_x0020_Emails.includes(email));
             if(filteredData.length == 0){
