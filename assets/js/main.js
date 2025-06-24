@@ -56,6 +56,7 @@ function updateFileInput(filesArray, id) {
 //ENTRIES FUNCTIONS
 async function viewItem(id){
     let entryItem = spItems[id];
+    console.log(entryItem);
     let title = entryItem.Title;
     let year = entryItem.Year;
     let month = entryItem.Month;
@@ -77,24 +78,6 @@ async function viewItem(id){
     createdOn = createdOn.toLocaleDateString("en-US", options);
     let attachmentID = entryItem.Attachments ? entryItem.ID : null;
     let amplified = entryItem.Amplified;
-    /* let title = entry.data('title');
-    let year = entry.data('year');
-    let month = entry.data('month');
-    let subsl = entry.data('subsl');
-    let account = entry.data('account');
-    let team = entry.data('team');
-    let recognition = entry.data('recognition') ? "Individual" : "Team";
-    let recipients = entry.data('recipients').split('/ ');
-    let recipientHTML = "";
-    let worktype = entry.data('worktype');
-    let challenge = entry.data('challenge');
-    let help = entry.data('help');
-    let impact = entry.data('impact');
-    let uniqueness = entry.data('uniqueness') ? entry.data('uniqueness') : "N/A";
-    let author = await getUserDetailsById(entry.data('author'));
-    let createdBy = author ? author.Title : "Unknown";
-    let createdOn = entry.data('createdOn');
-    let attachmentID = entry.data('attachments'); */
     let logo = getAccountLogo(account);
     $('#entryInfoEntry').text(title);
     $('#entryInfoYear').text(year);
@@ -330,6 +313,7 @@ function getAccountLogo(account){
     return "assets/img/logos/"+img + ".jpg";
 }
 async function getAttachments(itemID) {
+    console.log("Getting attachments for item ID:", itemID);
     try{
         const token = await getSharePointToken(); // Get a new token for SharePoint API
         const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/Web/Lists/GetByTitle('${splist}')/items(${itemID})/AttachmentFiles`, {
@@ -349,6 +333,7 @@ async function getAttachments(itemID) {
     
 }
 async function displayAttachments(itemID) {
+    console.log("Displaying attachments for item ID:", itemID);
     const attachments = await getAttachments(itemID);
     let html = "";
 
