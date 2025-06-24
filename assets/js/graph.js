@@ -379,6 +379,7 @@ async function signIn() {
             // Initiate login redirect
             await msalInstance.loginRedirect({
                 scopes: ["email", "openid","User.ReadBasic.All", "profile", "user.read", "Sites.Read.All", "Sites.ReadWrite.All"], // Initial scopes
+                prompt: "consent"
             });
             checkLoginStatus(); // Ensure this runs after a successful login
             window.location.reload();
