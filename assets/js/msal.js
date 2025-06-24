@@ -2,7 +2,9 @@
 async function getToken() {
     const accounts = msalInstance.getAllAccounts();
     if (accounts.length > 0) {
+        msalInstance.setActiveAccount(accounts[0]);
         const request = {
+            account: accounts[0],
             scopes: ["email", "openid","User.ReadBasic.All", "profile", "user.read", "Sites.Read.All", "Sites.ReadWrite.All"] // Replace with necessary scopes
         };
         try {
