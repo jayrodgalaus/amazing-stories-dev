@@ -237,9 +237,22 @@
                                 
                                 <div id="recipientDropdown"></div>
                                 <div class="d-none" id="otherRecipientContainer">
-                                    <input type="text" class="form-control mt-2" id="otherRecipientInput" placeholder="Name">
-                                    <input type="email" class="form-control ms-2 mt-2" id="otherRecipientEmailInput" value="no.email@dxc.com" placeholder="Email">
-                                    <button class="btn btn-primary ms-2 mt-2 small" type="button" id="addOtherRecipient">Add</button>
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            <label for="" class="mt-2">Is this recipient a team / individual?</label>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="recognitionPill px-2 text-center"><label for="otherRecipient1">Individual</label></div>
+                                            <div class="recognitionPill px-2 text-center"><label for="otherRecipient2">Team</label></div>
+                                            <input class="float-end" type="radio" name="otherRecipientType" checked="checked" id="otherRecipient1" style="opacity: 0;pointer-events: none;">
+                                            <input class="float-end" type="radio" name="otherRecipientType" id="otherRecipient2" style="opacity: 0;pointer-events: none;">
+                                        </div>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control mt-2" id="otherRecipientInput" placeholder="Name">
+                                            <input type="email" class="form-control ms-2 mt-2" id="otherRecipientEmailInput" value="no.email@dxc.com" placeholder="Email">
+                                            <button class="btn btn-primary ms-2 mt-2 small" type="button" id="addOtherRecipient">Add</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mt-2" id="recipientContainer"></div>
                                 <div class="d-flex align-items-center">
@@ -1145,6 +1158,10 @@
                 $('#'+carousel).show();
                 let prev = $(this).attr('data-previous');
                 $('#helpCanvas .btn-close').attr("data-bs-target","#"+prev).attr("aria-controls",prev);
+                if(access.type == 2){
+                    $('#entryInfoCarousel .carousel-item').removeClass('active');
+                    $('#entryInfoCarousel .carousel-item').first().addClass('active');
+                }
             })
 
             .on('click', '#cycleBG', function() {
