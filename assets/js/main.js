@@ -38,6 +38,16 @@ function setCurrentMonth() {
 
     // Set the selected option to the current month
     monthDropdown.selectedIndex = currentMonthIndex;
+
+    //disable future months
+    $("#monthDropdown option").each(function () {
+        const optionText = $(this).val(); // or use .text()
+        const optionIndex = monthNames.indexOf(optionText);
+
+        if (optionIndex > currentMonthIndex) {
+            $(this).prop("disabled", true);
+        }
+    });
     
 
 }
