@@ -242,10 +242,10 @@
                                             <label class="mt-2">Is this recipient a team / individual?</label>
                                         </div>
                                         <div class="d-flex">
-                                            <button type="button" class="otherRecipientBtn m-1">
+                                            <button type="button" class="otherRecipientBtn m-1 clicked" data-type="Individual">
                                                 <i class="fa-solid fa-person"></i>
                                             </button>
-                                            <button type="button" class="otherRecipientBtn m-1">
+                                            <button type="button" class="otherRecipientBtn m-1" data-type="Team">
                                                 <i class="fa-solid fa-people-group"></i>
                                             </button>
                                         </div>
@@ -1213,6 +1213,10 @@
             .on('click mousedown','input[name="recognitionInput"]',function(e) {
                 e.preventDefault();
             })
+            .on('click','.otherRecipientBtn',function(){
+                $('.otherRecipientBtn').removeClass('clicked');
+                $(this).addClass('clicked');
+            })
             .on('click', '.removeRecipient', function() {
                 $(this).parent().remove(); // Remove the recipient pill
                 $('.recognitionPill').removeClass('bg-secondary-subtle');
@@ -1588,19 +1592,25 @@
                     showModal("Error", "Please enter a name and email for the other recipient.");
                     return;
                 }
+                const recipientType = "type-"+$('.otherRecipientBtn.clicked').attr('data-type');
                 const recipientContainer = $('#recipientContainer');
-                const newRecipient = $(`<div class="recipientPill bg-secondary-subtle px-2" value="${otherRecipientEmail}" name="${otherRecipientName}">${otherRecipientName}<button class="removeRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
+                const newRecipient = $(`<div class="recipientPill bg-secondary-subtle px-2 ${recipientType}" value="${otherRecipientEmail}" name="${otherRecipientName}">${otherRecipientName}<button class="removeRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
                 recipientContainer.append(newRecipient);
                 otherRecipientInput.val(''); // Clear the input field
                 otherRecipientEmailInput.val(''); // Clear the email field
                 $('#otherRecipientContainer').removeClass('d-flex').addClass('d-none'); // Hide the other recipient container
                 $('#recipientDropdown').empty().hide(); // Clear the dropdown suggestions
                 if($('.recipientPill').length > 0){
-                    if($('.recipientPill').length == 1){
+                    if($('.recipientPill').length == 1 && !$('.recipientPill').hasClass('type-Team')){
                         $('#recognitionInput1').prop('checked', true);
                         $('#recognitionInput2').removeProp('checked').removeAttr('checked');
                         $('.recognitionPill').removeClass('bg-secondary-subtle');
                         $('#recognitionInput1Label').addClass('bg-secondary-subtle');
+                    }else if($('.recipientPill').length == 1 && $('.recipientPill').hasClass('type-Team')){
+                        $('#recognitionInput2').prop('checked', true);
+                        $('#recognitionInput1').removeProp('checked').removeAttr('checked');
+                        $('.recognitionPill').removeClass('bg-secondary-subtle');
+                        $('#recognitionInput2Label').addClass('bg-secondary-subtle');
                     }else{
                         $('#recognitionInput2').prop('checked', true);
                         $('#recognitionInput1').removeProp('checked').removeAttr('checked');

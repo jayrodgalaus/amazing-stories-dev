@@ -262,6 +262,10 @@
     box-shadow: none !important;
     transform: scale(1);
 }
+button.otherRecipientBtn.clicked{
+    color: white;
+    background-color: #5F249F;
+}
 .preview-paragraph{
     display: -webkit-box;
     -webkit-line-clamp: 2; /* Limit to 2 lines */
