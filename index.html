@@ -1275,11 +1275,11 @@
                                 if (recipients > 4) {
                                     if (width < height) {
                                         groupError = "For more than 4 recipients, it is recommended to upload <b>one</b> image in landscape orientation.";
-                                        showModal("Error", groupError);
+                                        showModal("Notice", groupError);
                                         return; // exits image.onload
                                     } else if (width / height < 1.5 || width / height > 2) {
                                         groupError = "For more than 4 recipients, it is recommended to upload <b>one</b> group image with an aspect ratio between 1.5:1 and 2:1. For example, <b>1920x1080</b> or <b>1600x900</b>.";
-                                        showModal("Error", groupError);
+                                        showModal("Notice", groupError);
                                         return;
                                     }
                                     $('#previewContainer').append(`<div class="m-2" id="previewDimensions"><b>Width</b>: ${width}px<br><b>Height</b>: ${height}px</div>`);
