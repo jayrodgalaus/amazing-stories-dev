@@ -264,7 +264,7 @@
 }
 button.otherRecipientBtn.clicked{
     color: white;
-    background-color: #5F249F;
+    background-color: #5F249F !important;
 }
 .preview-paragraph{
     display: -webkit-box;
