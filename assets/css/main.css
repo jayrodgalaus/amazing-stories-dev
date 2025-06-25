@@ -58,6 +58,24 @@
     padding: 5px 10px;
     cursor: pointer;
 }
+.otherRecipientBtn{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    box-shadow: 0.2rem 0.2rem 0.4rem 0.1rem rgba(0, 0, 0, 0.15);
+    /* margin-left: 0.5em; */
+    font-size: 12pt;
+    border: none!important;
+    border-radius: 50% !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    text-align: center;
+    color: var(--bs-tertiary-color);
+    transition: all 0.2s;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
 .recipientPill, .recognitionPill, .updateRecipientPill, .updateRecognitionPill{
     border-radius: 25px;
     min-width: 50px;
@@ -232,14 +250,14 @@
 .entry-card.Amplified .entry-actions button{
     color: rgb(226, 226, 226) !important;
 }
-.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover{
+.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover{
     color: var(--bs-btn-bg);
     transform: scale(1.1);
 }
 .entry-card.Amplified .entry-actions button:hover{
     color: white !important;
 }
-.entry-actions button:focus, button.help-btn:focus{
+.entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus{
     outline: none !important;
     box-shadow: none !important;
     transform: scale(1);

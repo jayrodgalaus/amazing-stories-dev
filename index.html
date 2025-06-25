@@ -237,26 +237,17 @@
                                 
                                 <div id="recipientDropdown"></div>
                                 <div class="d-none" id="otherRecipientContainer">
-                                    <div class="d-flex flex-column">
+                                    <div class="d-flex flex-column w-100">
                                         <div>
-                                            <label for="" class="mt-2">Is this recipient a team / individual?</label>
+                                            <label class="mt-2">Is this recipient a team / individual?</label>
                                         </div>
                                         <div class="d-flex">
-                                            <!-- <div class="recognitionPill px-2 text-center shadow bg-secondary-subtle" style="cursor: pointer;"><label for="otherRecipientType">Individual</label></div>
-                                            <div class="recognitionPill px-2 text-center shadow" style="cursor: pointer;"><label for="otherRecipientType">Team</label></div>
-                                            <input type="checkbox" id="otherRecipientType" checked style="opacity: 1;pointer-events: none;"> -->
-                                            <div class="input-group">
-                                                <div class="input-group-text">
-                                                    <input class="form-check-input mt-0" type="radio" id="otherRecipientType1" name="otherRecipientType" checked>
-                                                </div>
-                                                <label for="otherRecipientType1">Individual</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="input-group-text">
-                                                    <input class="form-check-input mt-0" type="radio" id="otherRecipientType2" name="otherRecipientType">
-                                                </div>
-                                                <label for="otherRecipientType2">Team</label>
-                                            </div>
+                                            <button type="button" class="otherRecipientBtn m-1">
+                                                <i class="fa-solid fa-person"></i>
+                                            </button>
+                                            <button type="button" class="otherRecipientBtn m-1">
+                                                <i class="fa-solid fa-people-group"></i>
+                                            </button>
                                         </div>
                                         <div class="d-flex">
                                             <input type="text" class="form-control mt-2" id="otherRecipientInput" placeholder="Name">
