@@ -229,7 +229,7 @@
     margin-left:auto;
     /* padding-right: 30pt; */
 }
-.entry-actions button, .otherRecipientBtn {
+.entry-actions button, .otherRecipientBtn, .updateOtherRecipientBtn {
     width: 40px;
     height: 40px;
     display: flex;
@@ -250,19 +250,19 @@
 .entry-card.Amplified .entry-actions button{
     color: rgb(226, 226, 226) !important;
 }
-.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover{
+.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover{
     color: var(--bs-btn-bg);
     transform: scale(1.1);
 }
 .entry-card.Amplified .entry-actions button:hover{
     color: white !important;
 }
-.entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus{
+.entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus, button.updateOtherRecipientBtn:focus{
     outline: none !important;
     box-shadow: none !important;
     transform: scale(1);
 }
-button.otherRecipientBtn.clicked{
+button.otherRecipientBtn.clicked, button.updateOtherRecipientBtn.clicked{
     color: white;
     background-color: #5F249F !important;
 }
