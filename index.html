@@ -242,10 +242,9 @@
                                             <label for="" class="mt-2">Is this recipient a team / individual?</label>
                                         </div>
                                         <div class="d-flex">
-                                            <div class="recognitionPill px-2 text-center"><label for="otherRecipient1">Individual</label></div>
-                                            <div class="recognitionPill px-2 text-center"><label for="otherRecipient2">Team</label></div>
-                                            <input class="float-end" type="radio" name="otherRecipientType" checked="checked" id="otherRecipient1" style="opacity: 0;pointer-events: none;">
-                                            <input class="float-end" type="radio" name="otherRecipientType" id="otherRecipient2" style="opacity: 0;pointer-events: none;">
+                                            <div class="recognitionPill px-2 text-center shadow bg-secondary-subtle" style="cursor: pointer;"><label for="otherRecipientType">Individual</label></div>
+                                            <div class="recognitionPill px-2 text-center shadow" style="cursor: pointer;"><label for="otherRecipientType">Team</label></div>
+                                            <input type="checkbox" id="otherRecipientType" checked style="opacity: 1;pointer-events: none;">
                                         </div>
                                         <div class="d-flex">
                                             <input type="text" class="form-control mt-2" id="otherRecipientInput" placeholder="Name">
