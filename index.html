@@ -1658,8 +1658,9 @@
                     showModal("Error", "Please enter a name and email for the other recipient.");
                     return;
                 }
+                const recipientType = "type-"+$('.updateOtherRecipientBtn.clicked').attr('data-type');
                 const recipientContainer = $('#updateRecipientContainer');
-                const newRecipient = $(`<div class="updateRecipientPill bg-secondary-subtle px-2" value="${otherRecipientEmail}" name="${otherRecipientName}">${otherRecipientName}<button class="removeRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
+                const newRecipient = $(`<div class="updateRecipientPill bg-secondary-subtle px-2 ${recipientType}" value="${otherRecipientEmail}" name="${otherRecipientName}">${otherRecipientName}<button class="removeRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
                 recipientContainer.append(newRecipient);
                 otherRecipientInput.val(''); // Clear the input field
                 otherRecipientEmailInput.val(''); // Clear the email field
@@ -2153,7 +2154,10 @@
                 });
                 $('#updateRecipientDropdown').empty().hide(); // Clear the dropdown suggestions
                 if(recipients.length > 0){
-                    if(recipients.length == 1){
+                    if(recipients.length == 1 && entryItem.Individual){
+                        $('#updateRecipientContainer .updateRecipientPill').addClass('type-Team')
+                    }
+                    if(entryItem.Individual){
                         $('#updateRecognitionInput1').prop('checked', true);
                         $('#updateRecognitionInput2').removeProp('checked').removeAttr('checked');
                         $('.updateRecognitionPill').removeClass('bg-secondary-subtle');
