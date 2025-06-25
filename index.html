@@ -1223,11 +1223,16 @@
                 if($('.recipientPill').length === 0){
                     $('#recipientInput').focus(); 
                     $('#recipientImages').val("");
-                }else if($('.recipientPill').length == 1){
+                }else if($('.recipientPill').length == 1 && !$('.recipientPill').hasClass('type-Team')){
                     $('#recognitionInput1').prop('checked', true);
                     $('#recognitionInput2').removeProp('checked').removeAttr('checked');
                     $('.recognitionPill').removeClass('bg-secondary-subtle');
                     $('#recognitionInput1Label').addClass('bg-secondary-subtle');
+                }else if($('.recipientPill').length == 1 && $('.recipientPill').hasClass('type-Team')){
+                    $('#recognitionInput2').prop('checked', true);
+                    $('#recognitionInput1').removeProp('checked').removeAttr('checked');
+                    $('.recognitionPill').removeClass('bg-secondary-subtle');
+                    $('#recognitionInput2Label').addClass('bg-secondary-subtle');
                 }else{
                     $('#recognitionInput2').prop('checked', true);
                     $('#recognitionInput1').removeProp('checked').removeAttr('checked');
