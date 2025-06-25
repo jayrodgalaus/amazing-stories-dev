@@ -1717,7 +1717,7 @@
                 const userId = $(this).data('user-id');
                 const email = $(this).data('email');
                 const recipientContainer = $('#updateRecipientContainer');
-                const newRecipient = $(`<div class="updateRecipientPill bg-secondary-subtle px-2" value="${email}" name="${selectedUser}">${selectedUser}<button class="removeRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
+                const newRecipient = $(`<div class="updateRecipientPill bg-secondary-subtle px-2" value="${email}" name="${selectedUser}">${selectedUser}<button class="updateRemoveRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
                 recipientContainer.append(newRecipient);
                 $('#updateRecipientInput').val(''); // Clear the input field
                 $('#updateRecipientDropdown').empty().hide(); // Clear the dropdown suggestions
