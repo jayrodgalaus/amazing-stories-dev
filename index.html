@@ -1660,7 +1660,7 @@
                 }
                 const recipientType = "type-"+$('.updateOtherRecipientBtn.clicked').attr('data-type');
                 const recipientContainer = $('#updateRecipientContainer');
-                const newRecipient = $(`<div class="updateRecipientPill bg-secondary-subtle px-2 ${recipientType}" value="${otherRecipientEmail}" name="${otherRecipientName}">${otherRecipientName}<button class="removeRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
+                const newRecipient = $(`<div class="updateRecipientPill bg-secondary-subtle px-2 ${recipientType}" value="${otherRecipientEmail}" name="${otherRecipientName}">${otherRecipientName}<button class="updateRemoveRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`);
                 recipientContainer.append(newRecipient);
                 otherRecipientInput.val(''); // Clear the input field
                 otherRecipientEmailInput.val(''); // Clear the email field
