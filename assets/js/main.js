@@ -308,6 +308,7 @@ function getAccountLogo(account){
         case "ThyssenKrupp": img = "ThyssenKrupp"; break;
         case "Toronto Dominion Bank": img = "Toronto Dominion Bank"; break;
         case "Tops Markets LLC": img = "Tops"; break;
+        case "Transport for NSW": img = "Transport for NSW"; break;
         case "Uniper": img = "Uniper"; break;
         case "Valeo": img = "Valeo"; break;
         case "Ventia": img = "Ventia"; break;
