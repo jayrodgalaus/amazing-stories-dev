@@ -183,7 +183,7 @@ function callTippy(selector,content="Fancy seeing you here!",placement="top"){
     ];
 
     tippy(selector, {
-        content: greetings[getRandomIndex(geetings)],
+        content: greetings[getRandomIndex(greetings)],
         placement, placement,
         arrow: true,
     });
