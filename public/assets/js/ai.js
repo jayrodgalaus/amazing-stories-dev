@@ -31,7 +31,7 @@ $(document).ready(function(){
             "Hey, let’s make something awesome!"
         ];
         let id = '#'+$(this).attr('id');
-        let greeting = greetings[getRandomIndex[greetings]];
+        let greeting = greetings[getRandomIndex(greetings)];
         callTippy(id,greeting,"right");
     })
 });
