@@ -16,9 +16,9 @@ async function callMyAI(prompt) {
 }
 
 function mistralCheckDraft(element){
-    const type = $(element).attr('contentType');
-    let textarea = $(element).attr('textarea');
-    let id = $(element).attr('id');
+    const type = element.attr('contentType');
+    let textarea = element.attr('textarea');
+    let id = element.attr('id');
     let draft = $('#'+textarea).val().trim();
     let selector = '#'+id;
     if(draft.length < 200){
