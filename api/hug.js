@@ -2,7 +2,7 @@ export default async function handler(req, res) {
     const prompt = req.body.prompt;
     try{  
         console.log(process.env.HUGGINGFACE_API_KEY)
-        const response = await fetch("https://api-inference.huggingface.co/models/bigscience/bloom", {
+        const response = await fetch("https://api-inference.huggingface.co/models/gpt2", {
             method: "POST",
             headers: {
             "Authorization": `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
