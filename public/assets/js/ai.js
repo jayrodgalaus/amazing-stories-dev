@@ -17,7 +17,7 @@ async function callMyAI(prompt) {
 
 $(document).ready(function(){
     $(document).
-    on('mouseenter', '#mistralChallenge',function(){
+    one('mouseenter', '#mistralChallenge',function(){
         callTippy('#mistralChallenge');
     })
 });
