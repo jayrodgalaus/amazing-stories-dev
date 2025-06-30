@@ -164,9 +164,26 @@ function cleanPPTText(text){
     .trim();
     return cleanedText;
 }
+function getRandomIndex(array) {
+    return Math.floor(Math.random() * array.length);  
+}
+
 function callTippy(selector,content="Fancy seeing you here!",placement="top"){
+    const greetings = [
+        "Fancy seeing you here!",
+        "Well hello there!",
+        "Look who it is!",
+        "Hey, glad you dropped by!",
+        "Ah, just the person I was hoping for!",
+        "Hey hey! Ready to dive in?",
+        "Welcome back, superstar!",
+        "There you are — I was just thinking about you!",
+        "Good to see you again!",
+        "Hey, let’s make something awesome!"
+    ];
+
     tippy(selector, {
-        content: content,
+        content: greetings[getRandomIndex(geetings)],
         placement, placement,
         arrow: true,
     });
