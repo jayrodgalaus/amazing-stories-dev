@@ -173,6 +173,8 @@ function callTippy(selector,content="Fancy seeing you here!",placement="top"){
         content: content,
         placement, placement,
         arrow: true,
+        allowHTML: true,
+        interactive: true,
     });
 }
 
