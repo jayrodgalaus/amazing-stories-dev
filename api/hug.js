@@ -1,19 +1,28 @@
 export default async function handler(req, res) {
     const prompt = req.body.prompt;
     try{  
-        console.log(process.env.HUGGINGFACE_API_KEY)
-        const response = await fetch("https://api-inference.huggingface.co/models/gpt2", {
+        fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-            "Authorization": `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
-            "Content-Type": "application/json"
+                "Authorization": `Bearer ${process.env.MISTRAL_API_KEY}`,
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({ inputs: prompt })
-        });
-        const data = await response.json();
-        res.status(200).json(data);
+            body: JSON.stringify({
+                model: "mistralai/mistral-7b-instruct:free",
+                messages: [
+                {
+                    role: "user",
+                    content: `${prompt}`
+                }
+                ]
+            })
+            })
+            .then(res => res.json())
+            .then(data => console.log(data.choices[0].message.content))
+            .catch(console.error);
+
     }catch(error){
-        res.status(500).json({ error: "Hugging Face request failed", details: error.message });
+        res.status(500).json({ error: "Mistral AI request failed", details: error.message });
     }
     
 }
