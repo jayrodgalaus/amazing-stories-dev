@@ -14,3 +14,10 @@ async function callMyAI(prompt) {
     const data = await response.json();
     console.log("AI response:", data.message);
 }
+
+$(document).ready(function(){
+    $(document).
+    on('mouseenter', '#mistralChallenge',function(){
+        callTippy('#mistralChallenge');
+    })
+});
