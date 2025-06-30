@@ -31,11 +31,15 @@ function mistralCheckDraft(element){
     }else{
         message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
             <hr>
-            <div class="d-flex">
-                <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Shorten</button>
-                <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Lengthen</button>
-                <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Clean up</button>
-                <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Paraphrase</button>
+            <div class="d-flex align-items-center justify-content-center">
+                <div>
+                    <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Shorten</button>
+                    <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Lengthen</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Clean up</button>
+                    <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Paraphrase</button>
+                </div>
             </div>
         `;
     }
