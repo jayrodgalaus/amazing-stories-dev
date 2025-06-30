@@ -16,8 +16,7 @@ async function callMyAI(prompt) {
 }
 
 $(document).ready(function(){
-    $(document).
-    one('mouseenter', '.mistral-button',function(){
+    $(document).on('mouseenter', '.mistral-button', function () {
         const greetings = [
             "Fancy seeing you here!",
             "Well hello there!",
@@ -30,8 +29,21 @@ $(document).ready(function(){
             "Good to see you again!",
             "Hey, let’s make something awesome!"
         ];
-        let id = '#'+$(this).attr('id');
-        let greeting = greetings[getRandomIndex(greetings)];
-        callTippy(id,greeting,"right");
-    })
+
+        const greeting = greetings[getRandomIndex(greetings)];
+        const el = this;
+
+        if (el._tippy) {
+            el._tippy.setContent(greeting);
+            el._tippy.show();
+        } else {
+            tippy(el, {
+            content: greeting,
+            placement: 'right',
+            arrow: true,
+            trigger: 'manual'
+            }).show();
+        }
+    });
+
 });
