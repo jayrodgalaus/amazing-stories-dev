@@ -169,13 +169,23 @@ function getRandomIndex(array) {
 }
 
 function callTippy(selector,content="Fancy seeing you here!",placement="top"){
-    tippy(selector, {
-        content: content,
-        placement, placement,
-        arrow: true,
-        allowHTML: true,
-        interactive: true,
-    });
+    const el = $(selector)[0];
+
+    if (el._tippy) {
+        el._tippy.setContent(content);
+        el.setProps({
+            placement:placement
+        })
+    } else {
+        
+        tippy(selector, {
+            content: content,
+            placement, placement,
+            arrow: true,
+            allowHTML: true,
+            interactive: true,
+        });
+    }
 }
 
 $(document).ready(function(){
