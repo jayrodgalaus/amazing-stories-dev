@@ -176,15 +176,16 @@ function callTippy(selector,content="Fancy seeing you here!",placement="top"){
         el.setProps({
             placement:placement
         })
-    } else {
-        
+        el._tippy.show();
+    } else {        
         tippy(selector, {
             content: content,
             placement, placement,
             arrow: true,
             allowHTML: true,
             interactive: true,
-        });
+            trigger: 'manual'
+        }).show();
     }
 }
 
