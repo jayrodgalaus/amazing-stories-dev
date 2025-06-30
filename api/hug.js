@@ -20,10 +20,12 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    console.log(data.choices?.[0]?.message?.content || "No message returned");
+    const message = data.choices?.[0]?.message?.content || "No message returned";
 
-    // Optional: send a dummy response to avoid timeout
-    res.status(200).end();
+    console.log("OpenRouter response:", message);
+
+    // ✅ Send a proper JSON response
+    res.status(200).json({ message });
   } catch (error) {
     console.error("Fetch failed:", error);
     res.status(500).json({ error: "Mistral AI request failed", details: error.message });

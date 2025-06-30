@@ -5,6 +5,12 @@ async function callMyAI(prompt) {
     body: JSON.stringify({ prompt })
   });
 
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Server error:", errorText);
+    return;
+  }
+
   const data = await response.json();
-  console.log(data);
+  console.log("AI response:", data.message);
 }
