@@ -149,6 +149,8 @@
     width: 17px;
     height: 17px;
     padding: 0;
+    transition: all 0.2s;
+
 }
 
 .card.entrypage{
@@ -250,14 +252,14 @@
 .entry-card.Amplified .entry-actions button{
     color: rgb(226, 226, 226) !important;
 }
-.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover{
+.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover, .info-button:hover{
     color: var(--bs-btn-bg);
     transform: scale(1.1);
 }
 .entry-card.Amplified .entry-actions button:hover{
     color: white !important;
 }
-.entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus, button.updateOtherRecipientBtn:focus{
+.entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus, button.updateOtherRecipientBtn:focus, .info-button:focus{
     outline: none !important;
     box-shadow: none !important;
     transform: scale(1);

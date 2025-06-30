@@ -1,16 +1,16 @@
 async function callMyAI(prompt) {
-  const response = await fetch("/api/hug", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt })
-  });
+    const response = await fetch("/api/hug", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+    });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Server error:", errorText);
-    return;
-  }
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server error:", errorText);
+        return;
+    }
 
-  const data = await response.json();
-  console.log("AI response:", data.message);
+    const data = await response.json();
+    console.log("AI response:", data.message);
 }

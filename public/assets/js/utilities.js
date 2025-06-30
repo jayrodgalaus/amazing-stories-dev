@@ -164,3 +164,116 @@ function cleanPPTText(text){
     .trim();
     return cleanedText;
 }
+function callTippy(selector,content="Fancy seeing you here!",placement="top"){
+    tippy(selector, {
+        content: content,
+        placement, placement,
+        arrow: true,
+    });
+}
+
+$(document).ready(function(){
+    $(document)
+    .on('click','#confirmModalCancel',function(){
+        $('#confirmModalBtn').off('click');
+    })
+    .on('click','.help-btn',function(){
+        $('#helpCanvas .offcanvas-title').text($(this).data('title'));
+        let carousel = $(this).attr('data-carousel');
+        $('#helpCanvas .carousel').hide();
+        $('#'+carousel).show();
+        let prev = $(this).attr('data-previous');
+        $('#helpCanvas .btn-close').attr("data-bs-target","#"+prev).attr("aria-controls",prev);
+        if(access.type == 2){
+            $('#entryInfoCarousel .carousel-item').removeClass('active');
+            $('#entryInfoCarousel .carousel-item').first().addClass('active');
+        }
+    })
+    .on('click', '#cycleBG', function() {
+        let currentBG = parseInt($('#cycleBG').attr('backgroundImage'));
+        currentBG = currentBG === 4 ? 1 : currentBG + 1; // Cycle through backgrounds 1 to 4
+        
+        $('#home-page').css('backgroundImage', 'url("assets/img/bg' + currentBG + '.png")');
+        $(this).css('transform', 'rotate(' + (currentBG * 90) + 'deg)');
+        $(this).attr('backgroundImage', currentBG);
+    })
+    .on('click','.info-button',function() {
+        const infoType = $(this).attr('id').replace('Info', '');
+        let message = '';
+        let title='';
+        switch (infoType) {
+            case 'recognition':
+                message = `
+                    <p>Individual / Team recognition is determined based on the number of recipients.</p>`;
+                title = 'Individual / Team Recognition';
+                break;
+            case 'recipientNames':
+                message = `
+                    <p>Search the recipients on the search bar. If the recipient has already resigned or can't be found, click on <b>"Others"</b>. <br>Similarly, you can also add group or team names using <b>"Others"</b>.</p>
+                    <p><b>Note:</b> Adding or changing recipients will automatically reset uploaded images.</p>
+                    `;
+                title = 'Recipient Names';
+                break;
+            case 'recipientImages':
+                message = `
+                    <p>Upload images of the recipients. You can select multiple images.<br></p>
+                    <p><b>Note:</b> You can only upload one image per recipient, upto a maximum of 4 images. </p>
+                    <p>For more than 4 recipients, it is recommended to upload <b>one</b> image in landscape orientation.</p>
+                    `;
+                title = 'Recipient Images';
+                break;
+            case 'businessChallenge':
+                message = `
+                Should answer the question “What happened”?
+                <ol>
+                            <li>What is the background of the issue? Describe the situation</li>
+                            <li>What issue needed to be solved/addressed? What problem caused the need for DXC to take action?</li>
+                            <li>What is the timeline or timeframe? Did something need to be resolved quickly? Was there an issue going on for too long?</li>
+                        </ol>`;
+                        title = 'Customer Challenge';
+                        break;
+                    case 'howDXCHelped':
+                        message = 
+                        `Should answer the question “What did DXC do to execute the task and how we did it?”
+                        <br>What specific actions were taken?`;
+                        title = 'How DXC Helped';
+                        break;
+                    case 'businessImpact':
+                        message = `
+                            Should answer “What was the result or impact?”<br>Are there any cost savings?
+                            <br>Did it save on time and efforts?
+                            <br>Did it give way to an opportunity for renewal of work/ contract extension or for additional work?
+                            <br>Quantify Results
+                            <ul>
+                                <li>Cost savings of X amount/quarter</li>
+                                <li>Reduced effort from X hours to Y minutes</li>
+                                <li>Reduced tickets by x % in Y months</li>
+                            </ul>`;
+                        title = 'Customer Impact';
+                        break;
+                    case 'uniqueness':
+                        message = 
+                        `Should answer the question “What sets this apart from others?”
+                            <br>Is the action/task unique? What makes this unique? Has this not been done before?
+                            <br>What uniqueness does it introduce to the Customer/ Market?
+                            <br>What makes this complex? Is it very technical? Is it due to time constraints? Is it due to volume of work? Are there multiple factors that need to be considered simultaneously? 
+                            <br>Is this an innovation?
+                            <br>NON-BAU is preferred
+                            <br>Can be BAU work as long as uniqueness or complexity is justified
+                            <br>Client centric –impact statement
+                            <br>The amazing stories that have been justified as unique or complex will be reviewed with Cleif and can potentially become candidates for submission to global.`
+                        ;
+                        title = 'Uniqueness/Complexity';
+                        break;
+                    case 'outcome':
+                        message = 'Describe the business outcome achieved through this work.';
+                        title = 'Business Outcome';
+                        break;
+                    default:
+                        message = 'No information available.';
+                }
+                showModal(title, message);
+    })
+
+            
+})
