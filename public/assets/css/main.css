@@ -346,7 +346,13 @@ button.otherRecipientBtn.clicked, button.updateOtherRecipientBtn.clicked{
 .highres.loaded {
   opacity: 1;
 }
-
+.mistral-button{
+    width: 23px;
+    position: absolute;
+    right: -5px;
+    top: 12px;
+    height: 23px;
+}
 .mistral-button > img{
     width: 100%;
     height: 100%;
