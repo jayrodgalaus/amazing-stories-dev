@@ -21,6 +21,12 @@ function mistralCheckDraft(element){
     let id = element.attr('id');
     let draft = $('#'+textarea).val().trim();
     let selector = '#'+id;
+    console.log("element",element,
+        "textarea",textarea,
+        "id",id,
+        "draft",draft,
+        "selector",selector
+        )
     if(draft.length < 200){
         callTippy(selector, mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)],"right")
     }else if(draft.length > 1900){
