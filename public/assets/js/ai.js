@@ -28,7 +28,17 @@ $(document).ready(function(){
             "Welcome back, superstar!",
             "There you are — I was just thinking about you!",
             "Good to see you again!",
-            "Hey, let\’s make something awesome!"
+            "Hey, let\’s make something awesome!",
+            "Oh hey, didn't see you there!",
+            "Back for more? I like your style.",
+            "You again? This must be fate.",
+            "Just in time — I was getting bored.",
+            "Ah, the legend returns!",
+            "You always know when to show up.",
+            "Let\’s make some magic, shall we?",
+            "I was hoping you'd click that.",
+            "You\’ve got great timing, as always.",
+            "Let\’s do something brilliant together!"
         ];
 
         const greeting = greetings[getRandomIndex(greetings)];
@@ -45,7 +55,7 @@ $(document).ready(function(){
             trigger: 'manual'
             }).show();
         }
-        })
+    })
     .on('mouseleave', '.mistral-button', function () {
         const el = this;
         if (el._tippy) {

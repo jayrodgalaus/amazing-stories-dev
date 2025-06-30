@@ -347,7 +347,7 @@ button.otherRecipientBtn.clicked, button.updateOtherRecipientBtn.clicked{
   opacity: 1;
 }
 
-.mistral-button{
+.mistral-button > img{
     width: 100%;
     height: 100%;
 }
