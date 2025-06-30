@@ -174,7 +174,11 @@ function callTippy(selector,content="Fancy seeing you here!",placement="top"){
     if (el._tippy) {
         el._tippy.setContent(content);
         el._tippy.setProps({
-            placement:placement
+            placement, placement,
+            arrow: true,
+            allowHTML: true,
+            interactive: true,
+            trigger: 'manual'
         })
         el._tippy.show();
     } else {        
