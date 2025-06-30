@@ -167,7 +167,7 @@ $(document).ready(function(){
         let textarea = $(this).attr('textarea');
         let intent = $(this).text();
         let draft = $('#'+textarea).val().trim();
-        let type = $(this).attr(type);
+        let type = $(this).attr('type');
         let length = "Keep the response ";
         switch(intent){
             case "Shorten":
