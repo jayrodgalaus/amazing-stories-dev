@@ -17,7 +17,7 @@ async function callMyAI(prompt) {
 
 $(document).ready(function(){
     $(document).
-    one('mouseenter', '.mistral-button',function(){
+    on('mouseenter', '.mistral-button',function(){
         const greetings = [
             "Fancy seeing you here!",
             "Well hello there!",
@@ -30,7 +30,7 @@ $(document).ready(function(){
             "Good to see you again!",
             "Hey, let’s make something awesome!"
         ];
-        let id = $(this).attr('id');
+        let id = '#'+$(this).attr('id');
         let greeting = greetings[getRandomIndex[greetings]];
         callTippy(id,greeting,"right");
     })
