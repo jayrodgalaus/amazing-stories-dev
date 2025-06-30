@@ -21,11 +21,12 @@ function mistralCheckDraft(element){
     let id = element.attr('id');
     let draft = $('#'+textarea).val().trim();
     let selector = '#'+id;
-    if(draft.length < 200){
-        console.log("draft.length < 200")
+    if(draft.length == 0){
+        let message = `Need help getting started with ${type}? Just type the key points into the text area and we can work something out!`;
+        callTippy(selector, message,"right")
+    }else if(draft.length < 200){
         callTippy(selector, mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)],"right")
     }else if(draft.length > 1900){
-        console.log("draft.length > 1900")
         callTippy(selector, mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)],"right")
     }else{
         let message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
@@ -37,10 +38,8 @@ function mistralCheckDraft(element){
                 <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Paraphrase</button>
             </div>
         `;
-        console.log(message);
         callTippy(selector, message,"right")
     }
-    console.log("here");
 }
 
 //global variables
