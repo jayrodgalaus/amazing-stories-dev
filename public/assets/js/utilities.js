@@ -170,7 +170,7 @@ function getRandomIndex(array) {
 
 function callTippy(selector,content="Fancy seeing you here!",placement="top"){
     tippy(selector, {
-        content: greetings[getRandomIndex(greetings)],
+        content: content,
         placement, placement,
         arrow: true,
     });
