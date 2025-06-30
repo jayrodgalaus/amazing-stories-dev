@@ -151,12 +151,12 @@ $(document).ready(function(){
             }).show();
         }
     })
-    .on('mouseleave', '.mistral-button', function () {
+    /* .on('mouseleave', '.mistral-button', function () {
         const el = this;
         if (el._tippy) {
             el._tippy.hide();
         }
-    })
+    }) */
     .on('click','.mistral-button',function(){
         mistralCheckDraft($(this));
     })
