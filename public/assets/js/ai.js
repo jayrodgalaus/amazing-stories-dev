@@ -21,15 +21,15 @@ function mistralCheckDraft(element){
     let id = element.attr('id');
     let draft = $('#'+textarea).val().trim();
     let selector = '#'+id;
+    let message = "Hey hey.";
     if(draft.length == 0){
-        let message = `Need help getting started with ${type}? Just type the key points into the text area and we can work something out!`;
-        callTippy(selector, message,"right")
+        message = `Need help getting started with <b>${type}</b>? Just type the key points into the text area and we can work something out!`;
     }else if(draft.length < 200){
-        callTippy(selector, mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)],"right")
+        message = mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)] + " Let's make it at least 200 characters long.";
     }else if(draft.length > 1900){
-        callTippy(selector, mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)],"right")
+        message = mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)] + " Let's make it less than 1900 characters long.";
     }else{
-        let message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
+        message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
             <hr>
             <div class="d-flex">
                 <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Shorten</button>
@@ -38,8 +38,8 @@ function mistralCheckDraft(element){
                 <button type="button" class="btn btn-primary mx-1 mistral-improve-draft" textarea="${textarea}" type="${type}">Paraphrase</button>
             </div>
         `;
-        callTippy(selector, message,"right")
     }
+    callTippy(selector, message,"right")
 }
 
 //global variables
