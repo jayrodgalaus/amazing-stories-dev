@@ -198,7 +198,7 @@ async function addAttachments(itemId, files) {
         for (const file of files) {
             const fileName = file.name;
             const token = await getSharePointToken();
-            const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getbytitle('${splist}')/items(${itemId})/AttachmentFiles/add(FileName='${fileName}')`, {
+            const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getbytitle('Amazing Stories entries')/items(${itemId})/AttachmentFiles/add(FileName='${fileName}')`, {
                 method: "POST",
                 headers: {
                     "Accept": "application/json;odata=verbose",

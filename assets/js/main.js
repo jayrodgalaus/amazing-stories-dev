@@ -14,9 +14,20 @@ async function init(){
     document.querySelectorAll('.lazy-bg').forEach(el => {
         observer.observe(el);
     });
+    document.querySelectorAll('.lazy-bg.highres').forEach(el => {
+        const img = new Image();
+        const url = el.getAttribute('data-bg');
+        img.onload = () => {
+            requestAnimationFrame(() => {
+                el.style.backgroundImage = `url(${url})`;
+                el.classList.add('loaded');
+            });
+        };
+        img.src = url;
+    });
     let status = await checkLoginStatus();
     if(status){
-        // getSiteAndDriveDetails();
+        getSiteAndDriveDetails();
         addFormValidation();
         // embedPowerBIReport();
 
@@ -66,7 +77,6 @@ function updateFileInput(filesArray, id) {
 //ENTRIES FUNCTIONS
 async function viewItem(id){
     let entryItem = spItems[id];
-    console.log(entryItem);
     let title = entryItem.Title;
     let year = entryItem.Year;
     let month = entryItem.Month;
@@ -88,6 +98,24 @@ async function viewItem(id){
     createdOn = createdOn.toLocaleDateString("en-US", options);
     let attachmentID = entryItem.Attachments ? entryItem.ID : null;
     let amplified = entryItem.Amplified;
+    /* let title = entry.data('title');
+    let year = entry.data('year');
+    let month = entry.data('month');
+    let subsl = entry.data('subsl');
+    let account = entry.data('account');
+    let team = entry.data('team');
+    let recognition = entry.data('recognition') ? "Individual" : "Team";
+    let recipients = entry.data('recipients').split('/ ');
+    let recipientHTML = "";
+    let worktype = entry.data('worktype');
+    let challenge = entry.data('challenge');
+    let help = entry.data('help');
+    let impact = entry.data('impact');
+    let uniqueness = entry.data('uniqueness') ? entry.data('uniqueness') : "N/A";
+    let author = await getUserDetailsById(entry.data('author'));
+    let createdBy = author ? author.Title : "Unknown";
+    let createdOn = entry.data('createdOn');
+    let attachmentID = entry.data('attachments'); */
     let logo = getAccountLogo(account);
     $('#entryInfoEntry').text(title);
     $('#entryInfoYear').text(year);
@@ -127,7 +155,7 @@ async function getEntryById(id){
         "Title","Year","Month","SUBSL","Account","Team","Individual","Recipients","Recipient_x0020_Emails","Worktype","Challenge","Help","Impact","Uniqueness","Outcome","Amplified",'Id','AuthorId', "Classification"
     ];
     let conditions = [{field:"ID", value: id}];
-    let data = await getListWithSP_API(splist,fields,conditions);
+    let data = await getListWithSP_API("Amazing Stories entries",fields,conditions);
     
     if(data.length > 0)
         return data[0]; // Return the first item
@@ -154,7 +182,7 @@ async function getAllEntriesByMonth(month){
         conditions.push({field:"SUBSL", value: access.subsl});
     }
     // conditions.push({field:"Is_x0020_Deleted", value: false});
-    getListWithSP_API(splist,fields,conditions).then(data=>{
+    getListWithSP_API("Amazing Stories entries",fields,conditions).then(data=>{
         if(data.length > 0)
             processListItems(data,month,sort); // Process the retrieved items
         else
@@ -183,7 +211,7 @@ async function getSelfEntriesByMonth(month){
     }
     
     // conditions.push({field:"Is_x0020_Deleted", value: false});
-    getListWithSP_API(splist,fields,conditions,email).then(data=>{
+    getListWithSP_API("Amazing Stories entries",fields,conditions,email).then(data=>{
         if(data.length > 0)
             processListItems(data,month,sort); // Process the retrieved items
         else
@@ -203,7 +231,7 @@ async function getOwnRecognition(month) {
         if(month != 'All'){
             conditions = [{field:"Month", value: month}];
         }
-        let data = await getListWithSP_API(splist, fields, conditions);
+        let data = await getListWithSP_API("Amazing Stories entries", fields, conditions);
         if (data && data.length > 0) {
             
             let fields = [
@@ -223,7 +251,7 @@ async function getOwnRecognition(month) {
             let filterQuery = ids.map(id => month !== 'All' ? `(ID eq ${id} and Month eq '${month}')` : `(ID eq ${id})`).join(' or ');
             let selectQuery = fields.join(',');
 
-            const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getByTitle('${splist}')/items?$filter=${filterQuery}&$select=${selectQuery}`;
+            const url = `https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/web/lists/getByTitle('Amazing Stories entries')/items?$filter=${filterQuery}&$select=${selectQuery}`;
             const token = await getSharePointToken();
             const response = await fetch(url, {
                 method: "GET",
@@ -324,10 +352,9 @@ function getAccountLogo(account){
     return "assets/img/logos/"+img + ".jpg";
 }
 async function getAttachments(itemID) {
-    console.log("Getting attachments for item ID:", itemID);
     try{
         const token = await getSharePointToken(); // Get a new token for SharePoint API
-        const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/Web/Lists/GetByTitle('${splist}')/items(${itemID})/AttachmentFiles`, {
+        const response = await fetch(`https://dxcportal.sharepoint.com/sites/ITOEECoreTeam/_api/Web/Lists/GetByTitle('Amazing Stories entries')/items(${itemID})/AttachmentFiles`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -344,7 +371,6 @@ async function getAttachments(itemID) {
     
 }
 async function displayAttachments(itemID) {
-    console.log("Displaying attachments for item ID:", itemID);
     const attachments = await getAttachments(itemID);
     let html = "";
 

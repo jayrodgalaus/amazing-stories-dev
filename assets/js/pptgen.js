@@ -279,22 +279,22 @@ async function createPresentation(entry){
     ];
     let challengeText = [
         { text: "Customer Challenge\n", options:{ bold: true, fontSize: 16, color: themeColor}},
-        { text: entry.Challenge, options: { fontSize: 12, color: '000000' } }
+        { text: cleanPPTText(entry.Challenge), options: { fontSize: 12, color: '000000' } }
     ];
     let impactText = [
         { text: "Customer Impact\n", options:{ bold: true, fontSize: 16, color: themeColor}},
-        { text: entry.Impact, options: { fontSize: 12, color: '000000' } }
+        { text: cleanPPTText(entry.Impact), options: { fontSize: 12, color: '000000' } }
     ];
     let uniquenessText = [];
     if(entry.Uniqueness && entry.Uniqueness.trim().length > 0){
         uniquenessText = [
             { text: "Uniqueness/Complexity\n", options:{ bold: true, fontSize: 16, color: themeColor}},
-            { text: entry.Uniqueness, options: { fontSize: 12, color: '000000' } }
+            { text: cleanPPTText(entry.Uniqueness), options: { fontSize: 12, color: '000000' } }
         ];
     }
     let helpText = [
         { text: "How DXC Helped\n", options:{ bold: true, fontSize: 16, color: themeColor}},
-        { text: entry.Help, options: { fontSize: 12, color: '000000' } }
+        { text: cleanPPTText(entry.Help), options: { fontSize: 12, color: '000000' } }
     ];
     let copyrightText = [
         { text: "© 2023 DXC Technology Company. All rights reserved.", options: { fontSize: 9.2, color: '000000' } }
@@ -371,74 +371,6 @@ async function createPresentation(entry){
                 return;
             }
         }
-        /* let soloImgX = cmToIn(4.485);
-        let soloImgY = cmToIn(8);
-        switch(recipientCount){
-            case 1:{
-                slides[i].addText(`${entry.Recipients}`, { ...indivRecipientBox });
-                
-                if(Array.isArray(images) && images.length > 0){
-                    let dimensions = await getImageDimensions(images[0]);//getImageDimensionsFromBase64(images[0]);
-                    let imgwidth = pxToInches(dimensions.width);
-                    let imgheight = pxToInches(dimensions.height);
-                    let image = images[0].replace(/^data:/, "");
-                    slides[i].addImage({
-                        data: image,
-                        x: soloImgX,
-                        y: soloImgY,
-                        w: imgwidth,
-                        h: imgheight,
-                        sizing: { 
-                            type: 'contain',
-                            w: cmToIn(4),//,
-                            h: cmToIn(4)//
-                        }
-                    });
-
-                }
-            break;}
-            case 2:{
-                slides[i].addText(`${entry.Recipients}`, { ...teamRecipientBox });
-                
-                if(Array.isArray(images) && images.length > 0){
-                    for(let j = 0; j < images.length; j++){
-                        let dimensions = await getImageDimensions(images[j]);//getImageDimensionsFromBase64(images[j]);
-                        let imgwidth = pxToInches(dimensions.width);
-                        let imgheight = pxToInches(dimensions.height);
-                        let image = images[j].replace(/^data:/, "");
-                        slides[i].addImage({
-                            data: image,
-                            x: soloImgX + (j * cmToIn(4.485)), // Adjusting X position for each image
-                            y: soloImgY,
-                            w: imgwidth,
-                            h: imgheight,
-                            sizing: { 
-                                type: 'contain',
-                                w: cmToIn(4),//,
-                                h: cmToIn(4)//
-                            }
-                        });
-                    }
-                    if(images.length == 1){}
-                    let dimensions = await getImageDimensions(images[0]);//getImageDimensionsFromBase64(images[0]);
-                    let imgwidth = pxToInches(dimensions.width);
-                    let imgheight = pxToInches(dimensions.height);
-                    let image = images[0].replace(/^data:/, "");
-                    slides[i].addImage({
-                        data: image,
-                        x: cmToIn(4.485),
-                        y: cmToIn(8),
-                        w: imgwidth,
-                        h: imgheight,
-                        sizing: { 
-                            type: 'contain',
-                            w: cmToIn(4),//,
-                            h: cmToIn(4)//
-                        }
-                    });
-                }
-            }
-        } */
     }
     switch(template){
         case "sp":{ //single page without uniqueness

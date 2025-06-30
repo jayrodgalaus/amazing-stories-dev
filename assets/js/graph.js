@@ -205,8 +205,8 @@ async function getFromSharePoint(listName, fields, conditions) {
 async function getListWithSP_API(listName, fields=[], conditions=[], author = null) {
     const token = await getSharePointToken();
     if (!token) {
-        showModal("Error","Failed to obtain authentication token. Please refresh the page and try again.")
         throw new Error("Failed to obtain authentication token.");
+        showModal("Error","Failed to obtain authentication token. Please refresh the page and try again.")
     };
 
     try {
@@ -226,7 +226,7 @@ async function getListWithSP_API(listName, fields=[], conditions=[], author = nu
                 filterQuery.push(`${cond.field} eq '${cond.value}'`);
             });
         }
-        if(listName == splist)
+        if(listName == "Amazing Stories entries")
             filterQuery.push("Is_x0020_Deleted eq false"); // Ensure we only get non-deleted items
 
         // Construct final request URL

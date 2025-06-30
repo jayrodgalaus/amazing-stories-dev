@@ -157,3 +157,10 @@ async function sendEmail(beforeData, afterData) {
     })
     .catch(error => console.error("Error:", error));
 }
+
+function cleanPPTText(text){
+    const cleanedText = text
+    .replace(/[\x00-\x1F\x7F]/g, '') // removes most control characters
+    .trim();
+    return cleanedText;
+}
