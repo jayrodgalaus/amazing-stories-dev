@@ -173,7 +173,7 @@ function callTippy(selector,content="Fancy seeing you here!",placement="top"){
 
     if (el._tippy) {
         el._tippy.setContent(content);
-        el.setProps({
+        el._tippy.setProps({
             placement:placement
         })
         el._tippy.show();
