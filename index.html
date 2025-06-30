@@ -70,6 +70,10 @@
                 <button class="btn btn-primary mt-2 me-2 spoc-element d-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#guideQuestionsCanvas" aria-controls="guideQuestionsCanvas" id="openGuideQuestions">Guide Questions</button>
                 <button class="btn btn-secondary mt-2" type="button" id="signOut">Sign Out</button>
             </div>
+            <div class="d-flex">
+                <input type="text" id="AIPrompt" class="form-control" placeholder="Prompt AI">
+                <button class="btn btn-primary ms-2" id="sendPrompt">Send</button>
+            </div>
         </div>
         
         
@@ -728,108 +732,6 @@
                     </div>
                 </div>
             </div> 
-            <!-- <div class="d-flex">
-                <ul class="list-group month-list-group">
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#JanuaryEntries" role="tab" aria-controls="JanuaryEntries">January</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#FebruaryEntries" role="tab" aria-controls="FebruaryEntries">February</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#MarchEntries" role="tab" aria-controls="MarchEntries">March</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#AprilEntries" role="tab" aria-controls="AprilEntries">April</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#MayEntries" role="tab" aria-controls="MayEntries">May</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#JuneEntries" role="tab" aria-controls="JuneEntries">June</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#JulyEntries" role="tab" aria-controls="JulyEntries">July</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#AugustEntries" role="tab" aria-controls="AugustEntries">August</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#SeptemberEntries" role="tab" aria-controls="SeptemberEntries">September</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#OctoberEntries" role="tab" aria-controls="OctoberEntries">October</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#NovemberEntries" role="tab" aria-controls="NovemberEntries">November</li>
-                    <li class="list-group-item nav-link" data-bs-toggle="tab" data-bs-target="#DecemberEntries" role="tab" aria-controls="DecemberEntries">December</li>
-                </ul>
-                <div class="tab-content flex-grow-1">
-                    <div class="tab-pane fade h-100" id="JanuaryEntries" role="tabpanel" aria-labelledby="JanuaryEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="FebruaryEntries" role="tabpanel" aria-labelledby="FebruaryEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="MarchEntries" role="tabpanel" aria-labelledby="MarchEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="AprilEntries" role="tabpanel" aria-labelledby="AprilEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="MayEntries" role="tabpanel" aria-labelledby="MayEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="JuneEntries" role="tabpanel" aria-labelledby="JuneEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="JulyEntries" role="tabpanel" aria-labelledby="JulyEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="AugustEntries" role="tabpanel" aria-labelledby="AugustEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="SeptemberEntries" role="tabpanel" aria-labelledby="SeptemberEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="OctoberEntries" role="tabpanel" aria-labelledby="OctoberEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="NovemberEntries" role="tabpanel" aria-labelledby="NovemberEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade h-100" id="DecemberEntries" role="tabpanel" aria-labelledby="DecemberEntries" tabindex="0">
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary mx-1" role="status"></div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
     <div class="offcanvas offcanvas-end vw-100" tabindex="-1" id="dashboardCanvas" aria-labelledby="dashboardCanvas">
@@ -1200,10 +1102,15 @@
     <script src="assets/js/sharepoint.js"></script>
     <script src="assets/js/utilities.js"></script>
     <script src="assets/js/pptgen.js"></script>
+    <script src="assets/js/ai.js"></script>
     <script>
         $(document).ready(function() {
             init();
             $(document)
+            .on('click','#sendPrompt',function(){
+                let text = $('#AIPrompt').val();
+                callMyAI(text);
+            })
             .on('click', '#signIn', function(){
                 signIn();
             })
