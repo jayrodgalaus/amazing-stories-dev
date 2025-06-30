@@ -252,14 +252,14 @@
 .entry-card.Amplified .entry-actions button{
     color: rgb(226, 226, 226) !important;
 }
-.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover, .info-button:hover{
+.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover, .info-button:hover, .mistral-button:hover{
     color: var(--bs-btn-bg);
     transform: scale(1.1);
 }
 .entry-card.Amplified .entry-actions button:hover{
     color: white !important;
 }
-.entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus, button.updateOtherRecipientBtn:focus, .info-button:focus{
+.entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus, button.updateOtherRecipientBtn:focus, .info-button:focus, .mistral-button:focus{
     outline: none !important;
     box-shadow: none !important;
     transform: scale(1);
@@ -347,11 +347,15 @@ button.otherRecipientBtn.clicked, button.updateOtherRecipientBtn.clicked{
   opacity: 1;
 }
 .mistral-button{
+    border: none;
+    border-radius: 50%;
+    height: 23px;
     width: 23px;
     position: absolute;
     right: -5px;
-    top: 12px;
-    height: 23px;
+    top: 18px;
+    padding: 0;
+    transition: all 0.2s;
 }
 .mistral-button > img{
     width: 100%;
