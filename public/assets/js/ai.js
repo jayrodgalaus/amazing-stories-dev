@@ -32,12 +32,12 @@ function mistralCheckDraft(element){
         message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
             <div class="d-flex align-items-center justify-content-center">
                 <div class="d-flex flex-column align-items-center justify-content-center mx-1">
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" type="${type}">Shorten</button>
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" type="${type}">Lengthen</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Shorten</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Lengthen</button>
                 </div>
                 <div class="d-flex flex-column align-items-center justify-content-center mx-1">
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" type="${type}">Clean up</button>
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" type="${type}">Paraphrase</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Clean up</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Paraphrase</button>
                 </div>
             </div>
         `;
@@ -167,22 +167,20 @@ $(document).ready(function(){
         let textarea = $(this).attr('textarea');
         let intent = $(this).text();
         let draft = $('#'+textarea).val().trim();
-        let type = $(this).attr('type');
+        let type = $(this).attr('contenttype');
         let length = "Keep the response ";
         switch(intent){
             case "Shorten":
-                length += "at least 200 characters long."
+                length += "AT LEAST 200 characters long."
             break;
             case "Lengthen":
-                length += "no more than 1900 characters long."
+                length += "NO MORE THAN 1900 characters long."
             break;
             default:
-                length += "within 200 to 1900 characters long."
+                length += "BETWEEN 200 TO 1900 characters long."
             break;
         }
-        const prompt = `
-        You are helping improve a professional entry for: ${type}.
-        Here is the current draft:
+        const prompt = `You are helping improve a professional entry for: ${type}. Here is the current draft:
         """
         ${draft}
         """
