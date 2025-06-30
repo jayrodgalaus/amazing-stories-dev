@@ -17,7 +17,7 @@ async function callMyAI(prompt) {
 
 $(document).ready(function(){
     $(document).
-    on('mouseenter', '.mistral-button',function(){
+    one('mouseenter', '.mistral-button',function(){
         const greetings = [
             "Fancy seeing you here!",
             "Well hello there!",
