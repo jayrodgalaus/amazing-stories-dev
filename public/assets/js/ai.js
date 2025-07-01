@@ -50,6 +50,15 @@ function mistralCheckDraft(element){
     }
     callTippy(selector, message,"right")
 }
+function cleanMistralOutput(text) {
+  return text
+    .replace(/\(\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '') // (1234 characters)
+    .replace(/character count\s*:\s*\d{1,3}(?:,\d{3})*/gi, '')   // Character count: 1234
+    .replace(/total\s*:\s*\d{1,3}(?:,\d{3})*\s*characters?/gi, '') // Total: 1,234 characters
+    .replace(/approx\.?\s*\d{1,3}(?:,\d{3})*\s*chars?/gi, '')    // Approx. 1234 chars
+    .replace(/\s{2,}/g, ' ') // collapse extra spaces
+    .trim();
+}
 
 //global variables
 const mistral_greetings = [
@@ -197,8 +206,9 @@ $(document).ready(function(){
 
         let response = await callMyAI(prompt);
         if(!response.error){
-            textarea.val(response.message)
+            textarea.val(cleanMistralOutput(response.message))
             callTippy(trigger,"Let me know if you like it!","right")
+            textarea.next('.text-count').text(response.message.length+" characters")
         }else{
             callTippy(trigger,response.message,"right")
         }
