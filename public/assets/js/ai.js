@@ -193,7 +193,7 @@ $(document).ready(function(){
         """
         ${draft}
         """
-        Please ${intent.toLowerCase()} the draft. ${lengthInstruction}, including all symbols and spaces. Do not exceed this limit. Do not include a character count in your response.`;
+        Please ${intent.toLowerCase()} the draft. ${lengthInstruction}, including all symbols and spaces. Do not exceed this limit. DO NOT include a character count in your response. DO NOT add anything aside from the revised draft.`;
 
         let response = await callMyAI(prompt);
         if(!response.error){
