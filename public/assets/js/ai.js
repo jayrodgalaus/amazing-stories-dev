@@ -202,14 +202,14 @@ $(document).ready(function(){
         mistralCheckDraft($(this));
     })
     .on('click','.mistral-improve-draft', async function(){
-        const holdOn = mistral_holdOn[getRandomIndex(mistral_holdOn)];
-        callTippy(trigger,holdOn,"right");
         let textarea = $('#'+$(this).attr('textarea'));
         let intent = $(this).text();
         let draft = textarea.val().trim();
         let type = $(this).attr('contenttype');
         let lengthInstruction = "";
         let trigger = $(this).attr('trigger');
+        const holdOn = mistral_holdOn[getRandomIndex(mistral_holdOn)];
+        callTippy(trigger,holdOn,"right");
         switch (intent) {
             case "Shorten":
                 lengthInstruction = "The new draft must be AT LEAST 200 characters long";
