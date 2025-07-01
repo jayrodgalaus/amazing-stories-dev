@@ -1047,7 +1047,7 @@ $(document).ready(function() {
     })
     .on('focus', '#businessChallengeInput, #businessImpactInput, #uniquenessInput ,#howDXCHelpedInput',function(){
         let id = $(this).attr('id');
-        $('.mistral-btn').removeClass('active')
+        $('.mistral-button').removeClass('active')
         $('.mistral-button[textarea='+id+']').addClass('active');
     })
     .on('submit','#newEntryForm', async function(e){
