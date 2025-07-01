@@ -235,7 +235,6 @@ $(document).ready(function(){
         instructions.push(`Do not exceed this limit.`);
         instructions.push(`DO NOT include a character count in your response or a kitten dies.`);
         instructions.push(`Only respond with the revised draft.`);
-        instructions.push(`Enclose the draft in double curly braces {{ }}.`)
         const prompt = instructions.join(' ');
 
         let response = await callMyAI(prompt);
