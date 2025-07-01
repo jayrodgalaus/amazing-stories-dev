@@ -231,10 +231,10 @@ $(document).ready(function(){
 
         let response = await callMyAI(prompt);
         if(!response.error){
-            let cleanMistralOutput = cleanMistralOutput(response.message.trim());
-            textarea.val(cleanMistralOutput)
+            let cleanOutput = cleanMistralOutput(response.message.trim());
+            textarea.val(cleanOutput)
             callTippy(trigger,"Let me know if you like it!","right")
-            textarea.next('.text-count').text(cleanMistralOutput+" characters")
+            textarea.next('.text-count').text(cleanOutput+" characters")
         }else{
             callTippy(trigger,response.message,"right")
         }
