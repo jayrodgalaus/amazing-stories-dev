@@ -1041,6 +1041,10 @@ $(document).ready(function() {
             $('#updatePreviewContainer').empty();
         }
     })
+    .on('input', '#businessChallengeInput, #businessImpactInput, #uniquenessInput ,#howDXCHelpedInput',function(){
+        let length = $(this).val().trim().length;
+        $(this).next('.text-count').text(length)
+    })
     .on('submit','#newEntryForm', async function(e){
         e.preventDefault();
         if($('#accountDropdown').val() === ""){
