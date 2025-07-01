@@ -52,6 +52,7 @@ function mistralCheckDraft(element){
 }
 function cleanMistralOutput(text) {
   return text
+    .replace(/\(\s*(approximately|approx\.?)?\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '')
     .replace(/\(\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '') // (1234 characters)
     .replace(/character count\s*:\s*\d{1,3}(?:,\d{3})*/gi, '')   // Character count: 1234
     .replace(/total\s*:\s*\d{1,3}(?:,\d{3})*\s*characters?/gi, '') // Total: 1,234 characters
