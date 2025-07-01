@@ -8,11 +8,12 @@ async function callMyAI(prompt) {
     if (!response.ok) {
         const errorText = await response.text();
         console.error("Server error:", errorText);
-        return;
+        return {error:errorText,message:"Sorry, something's wrong with my AI."};
     }
 
     const data = await response.json();
     console.log("AI response:", data.message);
+    return data;
 }
 
 function mistralCheckDraft(element){
@@ -27,23 +28,23 @@ function mistralCheckDraft(element){
     }else if(draft.length < 200){
         message = mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)] + ` Let's make it at least 200 characters long.
             <div class="d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Lengthen</button>
+                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Lengthen</button>
             </div>`;
     }else if(draft.length > 1900){
         message = mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)] + ` Let's make it less than 1900 characters long.
             <div class="d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Shorten</button>
+                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Shorten</button>
             </div>`;
     }else{
         message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
             <div class="d-flex align-items-center justify-content-center">
                 <div class="d-flex flex-column align-items-center justify-content-center mx-1">
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Shorten</button>
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Lengthen</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Shorten</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Lengthen</button>
                 </div>
                 <div class="d-flex flex-column align-items-center justify-content-center mx-1">
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Clean up</button>
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Rephrase</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Clean up</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Rephrase</button>
                 </div>
             </div>`;
     }
@@ -168,31 +169,40 @@ $(document).ready(function(){
     .on('click','.mistral-button',function(){
         mistralCheckDraft($(this));
     })
-    .on('click','.mistral-improve-draft', function(){
+    .on('click','.mistral-improve-draft', async function(){
         let textarea = $(this).attr('textarea');
         let intent = $(this).text();
         let draft = $('#'+textarea).val().trim();
         let type = $(this).attr('contenttype');
         let lengthInstruction = "";
+        let trigger = $(this).attr('trigger');
         switch (intent) {
-        case "Shorten":
-            lengthInstruction = "The result must be AT LEAST 200 characters";
-            break;
-        case "Lengthen":
-            lengthInstruction = "The result must be NO MORE THAN 1900 characters";
-            break;
-        default:
-            lengthInstruction = "The result must be BETWEEN 200 and 1900 characters";
-            break;
+            case "Shorten":
+                lengthInstruction = "The new draft must be AT LEAST 200 characters long";
+                break;
+            case "Lengthen":
+                lengthInstruction = "The new draft must be NO MORE THAN 1900 characters long";
+                break;
+            default:
+                lengthInstruction = "The new draft must be BETWEEN 200 and 1900 characters long";
+                break;
         }
 
-        const prompt = `You are helping improve a professional entry for: ${type}. Here is the current draft:
+        const prompt = `You are helping improve a professional entry for: ${type}.
+        Here is the current draft:
         """
         ${draft}
         """
-        Please ${intent.toLowerCase()} the draft. ${lengthInstruction} including symbols and spaces. Do not breach this limit. Before submitting, double-check that your response is within the required character range. If it exceeds the limit, revise and shorten it.`;
+        Please ${intent.toLowerCase()} the draft. ${lengthInstruction}, including all symbols and spaces. Do not exceed this limit. Do not include a character count in your response.`;
 
-        callMyAI(prompt);
+        let response = await callMyAI(prompt);
+        if(!response.error){
+            textarea.val(response.message)
+            callTippy(trigger,"Let me know if you like it!","right")
+        }else{
+            callTippy(trigger,response.message,"right")
+        }
+        
     })
 
 });
