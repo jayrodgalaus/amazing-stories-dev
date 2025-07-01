@@ -223,7 +223,10 @@ async function getListWithSP_API(listName, fields=[], conditions=[], author = nu
         // Add other conditions (direct properties, NOT fields/)
         if (conditions && conditions.length > 0) {
             conditions.forEach(cond => {
-                filterQuery.push(`${cond.field} eq '${cond.value}'`);
+                if(cond.field == 'SUBSL'){
+                    filterQuery.push(`${cond.field} eq '${encodeURIComponent(cond.value)}'`);
+                }else
+                    filterQuery.push(`${cond.field} eq '${cond.value}'`);
             });
         }
         if(listName == "Amazing Stories entries")
@@ -268,8 +271,8 @@ async function getListWithSP_API(listName, fields=[], conditions=[], author = nu
 async function updateSPItem(listName, id, fieldsArray) {
     const token = await getSharePointToken();
     if (!token) {
-        throw new Error("Failed to obtain authentication token.");
         showModal("Error", "Failed to obtain authentication token. Please refresh the page and try again.");
+        throw new Error("Failed to obtain authentication token.");
     }
 
     try {
