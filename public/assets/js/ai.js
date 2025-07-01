@@ -52,7 +52,7 @@ function mistralCheckDraft(element){
 }
 function cleanMistralOutput(text) {
   return text
-    .replace(/\(\s*(approximately|approx\.?)?\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '')
+    .replace(/\(\s*(about|around|exactly|approximately|approx\.?)?\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '')
     .replace(/\(\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '') // (1234 characters)
     .replace(/character count\s*:\s*\d{1,3}(?:,\d{3})*/gi, '')   // Character count: 1234
     .replace(/total\s*:\s*\d{1,3}(?:,\d{3})*\s*characters?/gi, '') // Total: 1,234 characters
@@ -234,7 +234,7 @@ $(document).ready(function(){
             let cleanOutput = cleanMistralOutput(response.message.trim());
             textarea.val(cleanOutput)
             callTippy(trigger,"Let me know if you like it!","right")
-            textarea.next('.text-count').text(cleanOutput+" characters")
+            textarea.next('.text-count').text(cleanOutput.length+" characters")
         }else{
             callTippy(trigger,response.message,"right")
         }
