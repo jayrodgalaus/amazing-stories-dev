@@ -1045,6 +1045,11 @@ $(document).ready(function() {
         let length = $(this).val().trim().length;
         $(this).next('.text-count').text(length)
     })
+    .on('focus', '#businessChallengeInput, #businessImpactInput, #uniquenessInput ,#howDXCHelpedInput',function(){
+        let id = $(this).attr('id');
+        $('.mistral-btn').removeClass('active')
+        $('.mistral-button[textarea='+id+']').addClass('active');
+    })
     .on('submit','#newEntryForm', async function(e){
         e.preventDefault();
         if($('#accountDropdown').val() === ""){
