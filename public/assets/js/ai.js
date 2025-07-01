@@ -170,9 +170,9 @@ $(document).ready(function(){
         mistralCheckDraft($(this));
     })
     .on('click','.mistral-improve-draft', async function(){
-        let textarea = $(this).attr('textarea');
+        let textarea = $('#'+$(this).attr('textarea'));
         let intent = $(this).text();
-        let draft = $('#'+textarea).val().trim();
+        let draft = textarea.val().trim();
         let type = $(this).attr('contenttype');
         let lengthInstruction = "";
         let trigger = $(this).attr('trigger');
