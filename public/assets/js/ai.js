@@ -150,6 +150,28 @@ const mistral_improvements = [
   "Good structure! Want to enhance the tone or clarity?",
   "Looks good! Want to explore a stronger version?"
 ];
+const mistral_holdOn = [
+  "Okay, hold on.",
+  "Got it — one sec.",
+  "Hang tight.",
+  "Just a moment.",
+  "Hold that thought.",
+  "Give me a second.",
+  "Alright, give me a moment.",
+  "One moment, please.",
+  "Let me check that.",
+  "Working on it...",
+  "Hold up a sec.",
+  "Okay, let me think.",
+  "Stand by...",
+  "Just a sec!",
+  "Alright, hang on.",
+  "Let me pull that up.",
+  "Give me a tick.",
+  "Hold on, almost there.",
+  "Okay, processing...",
+  "Let me take a look."
+];
 
 
 $(document).ready(function(){
@@ -180,6 +202,8 @@ $(document).ready(function(){
         mistralCheckDraft($(this));
     })
     .on('click','.mistral-improve-draft', async function(){
+        const holdOn = mistral_holdOn[getRandomIndex(mistral_holdOn)];
+        callTippy(trigger,holdOn,"right");
         let textarea = $('#'+$(this).attr('textarea'));
         let intent = $(this).text();
         let draft = textarea.val().trim();
@@ -207,9 +231,10 @@ $(document).ready(function(){
 
         let response = await callMyAI(prompt);
         if(!response.error){
-            textarea.val(cleanMistralOutput(response.message))
+            let cleanMistralOutput = cleanMistralOutput(response.message.trim());
+            textarea.val(cleanMistralOutput)
             callTippy(trigger,"Let me know if you like it!","right")
-            textarea.next('.text-count').text(response.message.length+" characters")
+            textarea.next('.text-count').text(cleanMistralOutput+" characters")
         }else{
             callTippy(trigger,response.message,"right")
         }
