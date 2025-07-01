@@ -235,6 +235,8 @@ $(document).ready(function(){
         instructions.push(`Do not exceed this limit.`);
         instructions.push(`DO NOT include a character count in your response or a kitten dies.`);
         instructions.push(`Only respond with the revised draft.`);
+        instructions.push(`Strictly use paragraphs only. Do not use bullet points.`);
+        instructions.push(`Do not add a title.`)
         const prompt = instructions.join(' ');
 
         let response = await callMyAI(prompt);
