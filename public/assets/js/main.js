@@ -1490,6 +1490,7 @@ $(document).ready(function() {
         //check if worktype is others
         if($('#updateTypeOfWork option[value="'+worktype+'"]').length > 0){
             $('#updateTypeOfWork').val(worktype);
+            $('#updateOtherTypeOfWorkInput').hide().removeProp('required').removeAttr('aria-required').val('');
         }else {
             $('#updateTypeOfWork').val('others');
             $('#updateOtherTypeOfWorkInput').show().prop('required', true).attr('aria-required', 'true').val(worktype);
