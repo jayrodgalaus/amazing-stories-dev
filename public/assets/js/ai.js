@@ -52,14 +52,19 @@ function mistralCheckDraft(element){
 }
 function cleanMistralOutput(text) {
   return text
-    .replace(/\(\s*(about|around|exactly|approximately|approx\.?)?\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '')
-    .replace(/\(\s*\d{1,3}(?:,\d{3})*\s*characters?\s*\)/gi, '') // (1234 characters)
-    .replace(/character count\s*:\s*\d{1,3}(?:,\d{3})*/gi, '')   // Character count: 1234
-    .replace(/total\s*:\s*\d{1,3}(?:,\d{3})*\s*characters?/gi, '') // Total: 1,234 characters
-    .replace(/approx\.?\s*\d{1,3}(?:,\d{3})*\s*chars?/gi, '')    // Approx. 1234 chars
-    .replace(/\s{2,}/g, ' ') // collapse extra spaces
+    // Matches: (1900 characters), (Exactly 1900 characters), (200-1900 characters), etc.
+    .replace(/\(\s*(exactly|approximately|approx\.?|about|around)?\s*\d{1,3}(?:,\d{3})*(\s*[-–]\s*\d{1,3}(?:,\d{3})*)?\s*characters?\s*\)/gi, '')
+    // Character count: 1234
+    .replace(/character count\s*:\s*\d{1,3}(?:,\d{3})*/gi, '')
+    // Total: 1,234 characters
+    .replace(/total\s*:\s*\d{1,3}(?:,\d{3})*\s*characters?/gi, '')
+    // Approx. 1234 chars, About 1,000 chars, etc.
+    .replace(/(exactly|approximately|approx\.?|about|around)?\s*\d{1,3}(?:,\d{3})*(\s*[-–]\s*\d{1,3}(?:,\d{3})*)?\s*chars?/gi, '')
+    // Collapse extra spaces
+    .replace(/\s{2,}/g, ' ')
     .trim();
 }
+
 
 //global variables
 const mistral_greetings = [
@@ -208,6 +213,7 @@ $(document).ready(function(){
         let type = $(this).attr('contenttype');
         let lengthInstruction = "";
         let trigger = $(this).attr('trigger');
+        let instructions=[];
         const holdOn = mistral_holdOn[getRandomIndex(mistral_holdOn)];
         callTippy(trigger,holdOn,"right");
         switch (intent) {
@@ -221,13 +227,16 @@ $(document).ready(function(){
                 lengthInstruction = "The new draft must be BETWEEN 200 and 1900 characters long";
                 break;
         }
-
-        const prompt = `You are helping improve a professional entry for: ${type}.
-        Here is the current draft:
-        """
-        ${draft}
-        """
-        Please ${intent.toLowerCase()} the draft. ${lengthInstruction}, including all symbols and spaces. Do not exceed this limit. DO NOT include a character count in your response. DO NOT add anything aside from the revised draft.`;
+        instructions.push(`You are helping improve a professional entry for: ${type}.`);
+        instructions.push(`DO NOT include a character count in your response or a puppy dies.`);
+        instructions.push(`Here is the current draft:"""${draft}"""`);
+        instructions.push(`Please ${intent.toLowerCase()} the draft.`);
+        instructions.push(`${lengthInstruction}, including all symbols and spaces.`);
+        instructions.push(`Do not exceed this limit.`);
+        instructions.push(`DO NOT include a character count in your response or a kitten dies.`);
+        instructions.push(`Only respond with the revised draft.`);
+        instructions.push(`Enclose the draft in double curly braces {{ }}.`)
+        const prompt = instructions.join(' ');
 
         let response = await callMyAI(prompt);
         if(!response.error){
