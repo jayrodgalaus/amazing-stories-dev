@@ -349,11 +349,11 @@ button.otherRecipientBtn.clicked, button.updateOtherRecipientBtn.clicked{
 .mistral-button{
     border: none;
     border-radius: 50%;
-    height: 23px;
-    width: 23px;
+    height: 30px;
+    width: 30px;
     position: absolute;
-    right: -5px;
-    top: 18px;
+    right: -12px;
+    top: 13px;
     padding: 0;
     transition: all 0.2s;
 }
