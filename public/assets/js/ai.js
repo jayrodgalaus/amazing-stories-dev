@@ -25,9 +25,15 @@ function mistralCheckDraft(element){
     if(draft.length == 0){
         message = `Need help getting started with <b>${type}</b>? Just type the key points into the text area and we can work something out!`;
     }else if(draft.length < 200){
-        message = mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)] + " Let's make it at least 200 characters long.";
+        message = mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)] + ` Let's make it at least 200 characters long.
+            <div class="d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Lengthen</button>
+            </div>`;
     }else if(draft.length > 1900){
-        message = mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)] + " Let's make it less than 1900 characters long.";
+        message = mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)] + ` Let's make it less than 1900 characters long.
+            <div class="d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Shorten</button>
+            </div>`;
     }else{
         message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
             <div class="d-flex align-items-center justify-content-center">
@@ -37,10 +43,9 @@ function mistralCheckDraft(element){
                 </div>
                 <div class="d-flex flex-column align-items-center justify-content-center mx-1">
                     <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Clean up</button>
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Paraphrase</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" textarea="${textarea}" contenttype="${type}">Rephrase</button>
                 </div>
-            </div>
-        `;
+            </div>`;
     }
     callTippy(selector, message,"right")
 }
@@ -168,23 +173,25 @@ $(document).ready(function(){
         let intent = $(this).text();
         let draft = $('#'+textarea).val().trim();
         let type = $(this).attr('contenttype');
-        let length = "Keep the response ";
-        switch(intent){
-            case "Shorten":
-                length += "AT LEAST 200 characters long."
+        let lengthInstruction = "";
+        switch (intent) {
+        case "Shorten":
+            lengthInstruction = "The result must be AT LEAST 200 characters";
             break;
-            case "Lengthen":
-                length += "NO MORE THAN 1900 characters long."
+        case "Lengthen":
+            lengthInstruction = "The result must be NO MORE THAN 1900 characters";
             break;
-            default:
-                length += "BETWEEN 200 TO 1900 characters long."
+        default:
+            lengthInstruction = "The result must be BETWEEN 200 and 1900 characters";
             break;
         }
+
         const prompt = `You are helping improve a professional entry for: ${type}. Here is the current draft:
         """
         ${draft}
         """
-        Please ${intent} the draft. ${length}`;
+        Please ${intent.toLowerCase()} the draft. ${lengthInstruction} including symbols and spaces. Do not breach this limit. Before submitting, double-check that your response is within the required character range. If it exceeds the limit, revise and shorten it.`;
+
         callMyAI(prompt);
     })
 
