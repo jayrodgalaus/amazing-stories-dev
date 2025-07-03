@@ -261,12 +261,18 @@ $(document).ready(function(){
                         break;
                     case 'businessImpact':
                         message = `
-                            Should answer “What was the result or impact?”<br>Are there any cost savings?
-                            <br>Did it save on time and efforts?
-                            <br>Did it give way to an opportunity for renewal of work/ contract extension or for additional work?
-                            <br>Quantify Results
+                            Should answer “What was the impact to the customer?” or “How does it advance or push forward our customer first strategy/ initiative?”<br>
+                            What would have happened on the customer's end if you were not successful or the action by DXC was not done?<br>
+                            Did it support any of your customer's initiatives?<br>
+                            How did this help the customer?<br>
+                            Are there any cost savings to the customer?<br>
+                            Did it save time and efforts to the customer?<br>
+                            Did it give way to an opportunity for renewal of work/ contract extension or for additional work?<br>
+                            <br>
+                            Quantify Results
                             <ul>
-                                <li>Cost savings of X amount/quarter</li>
+                                <li>Cost savings of X amount/quarter to the customer</li>
+                                <li>X amount of revenue loss of the customer if the issue was not resolved by DXC</li>
                                 <li>Reduced effort from X hours to Y minutes</li>
                                 <li>Reduced tickets by x % in Y months</li>
                             </ul>`;
