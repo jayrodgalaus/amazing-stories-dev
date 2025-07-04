@@ -1524,7 +1524,7 @@ $(document).ready(function() {
             updateSPItem(splist, id, fields).then(()=>{
                 showModal("Success", "Entry deleted successfully.");
                 entry.remove();
-                createDeleteEmail(title);
+                createDeleteEmail(title,"deleted");
             }).catch((error) => {
                 console.error("Error deleting entry:", error);
                 showModal("Error", "An error occurred while deleting the entry. Please try again.");
