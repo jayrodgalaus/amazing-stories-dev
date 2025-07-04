@@ -84,10 +84,10 @@ function dummydata() {
     $('#businessImpactInput').val("Nunc hendrerit ornare sem, sit amet commodo nibh. Donec non arcu rhoncus, porttitor mi eu, feugiat est. Fusce vestibulum ante vitae interdum semper. Sed ipsum purus, posuere et urna et, ornare semper felis. Sed est dolor, facilisis at nunc nec, molestie viverra arcu. Aliquam velit libero, aliquam in magna quis, vulputate faucibus mi. Nunc vel ipsum vitae urna placerat rhoncus ac at justo. Sed tristique posuere erat eu malesuada.");
 }
 
-//POWER AUTOMATE FUNCTIONSv
-async function sendEmail(beforeData, afterData) {
+//POWER AUTOMATE FUNCTIONS
+function createModifyEmail(beforeData, afterData){
     // Create table structure
-    let htmlTable = `
+    htmlTable = `
         <table border="1" style="border-collapse: collapse; width: 100%;">
             <thead>
                 <tr>
@@ -125,16 +125,25 @@ async function sendEmail(beforeData, afterData) {
             </tbody>
         </table>
     `;
-    const requestData = {email: htmlTable};
+    sendEmail(htmlTable,"modified");
+}
+function createDeleteEmail(entryTitle){
+    var html = `Entry <b>${entryTitle}</b> has been deleted by <b>${accountName}</b> on  ${new Date().toLocaleString()}.`;
+    sendEmail(html,"modified");
+
+}
+async function sendEmail(email, action) {
+    
+    const requestData = {email: email, action: action};
     // const token = await getToken();
     flowUrl = "https://prod-59.westus.logic.azure.com:443/workflows/cd16bc1b918a4169b7b97fbe081aeb51/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lsQ_obP9XwOg6WZ_-2FqJK3jw6sAX0ZbRLQHa7aQRhA"
     fetch(flowUrl, {
-    method: "POST",
-    headers: { 
-        // "AUthorization": `Bearer ${token}`,
-        "Content-Type": "application/json" 
-    },
-    body: JSON.stringify(requestData)
+        method: "POST",
+        headers: { 
+            // "AUthorization": `Bearer ${token}`,
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify(requestData)
 
     })
     .then(async response => {

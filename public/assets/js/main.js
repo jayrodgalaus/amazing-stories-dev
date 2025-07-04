@@ -1300,7 +1300,7 @@ $(document).ready(function() {
             if(attachments.length > 0 || attachmentsToDelete.length > 0){
                 filteredFields.push({name: "Attachments", value: true});
             }
-            sendEmail(spItems[id],filteredFields);
+            createModifyEmail(spItems[id],filteredFields);
             let updated = await getEntryById(id);
             spItems[id] = updated;
             showModal("Success", "Entry updated successfully.");
@@ -1524,6 +1524,7 @@ $(document).ready(function() {
             updateSPItem(splist, id, fields).then(()=>{
                 showModal("Success", "Entry deleted successfully.");
                 entry.remove();
+                createDeleteEmail(title);
             }).catch((error) => {
                 console.error("Error deleting entry:", error);
                 showModal("Error", "An error occurred while deleting the entry. Please try again.");
