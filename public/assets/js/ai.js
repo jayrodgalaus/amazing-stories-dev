@@ -1,71 +1,3 @@
-async function callMyAI(prompt) {
-    const response = await fetch("/api/hug", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
-    });
-
-    if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Server error:", errorText);
-        return {error:errorText,message:"Sorry, something's wrong with my AI."};
-    }
-
-    const data = await response.json();
-    console.log("AI response:", data.message);
-    return data;
-}
-
-function mistralCheckDraft(element){
-    const type = element.attr('contentType');
-    let textarea = element.attr('textarea');
-    let id = element.attr('id');
-    let draft = $('#'+textarea).val().trim();
-    let selector = '#'+id;
-    let message = "Hey hey.";
-    if(draft.length == 0){
-        message = `Need help getting started with <b>${type}</b>? Just type the key points into the text area and we can work something out!`;
-    }else if(draft.length < 200){
-        message = mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)] + ` Let's make it at least 200 characters long.
-            <div class="d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Lengthen</button>
-            </div>`;
-    }else if(draft.length > 1900){
-        message = mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)] + ` Let's make it less than 1900 characters long.
-            <div class="d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Shorten</button>
-            </div>`;
-    }else{
-        message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="d-flex flex-column align-items-center justify-content-center mx-1">
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Shorten</button>
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Lengthen</button>
-                </div>
-                <div class="d-flex flex-column align-items-center justify-content-center mx-1">
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Clean up</button>
-                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Rephrase</button>
-                </div>
-            </div>`;
-    }
-    callTippy(selector, message,"right")
-}
-function cleanMistralOutput(text) {
-  return text
-    // Matches: (1900 characters), (Exactly 1900 characters), (200-1900 characters), etc.
-    .replace(/\(\s*(exactly|approximately|approx\.?|about|around)?\s*\d{1,3}(?:,\d{3})*(\s*[-–]\s*\d{1,3}(?:,\d{3})*)?\s*characters?\s*\)/gi, '')
-    // Character count: 1234
-    .replace(/character count\s*:\s*\d{1,3}(?:,\d{3})*/gi, '')
-    // Total: 1,234 characters
-    .replace(/total\s*:\s*\d{1,3}(?:,\d{3})*\s*characters?/gi, '')
-    // Approx. 1234 chars, About 1,000 chars, etc.
-    .replace(/(exactly|approximately|approx\.?|about|around)?\s*\d{1,3}(?:,\d{3})*(\s*[-–]\s*\d{1,3}(?:,\d{3})*)?\s*chars?/gi, '')
-    // Collapse extra spaces
-    .replace(/\s{2,}/g, ' ')
-    .trim();
-}
-
-
 //global variables
 const mistral_greetings = [
     "Fancy seeing you here!",
@@ -177,6 +109,151 @@ const mistral_holdOn = [
   "Okay, processing...",
   "Let me take a look."
 ];
+const mistral_allDone = [
+  "All set!",
+  "Done and delivered!",
+  "Here it is!",
+  "Ready for you!",
+  "Boom — there you have it!",
+  "Your request, served fresh.",
+  "As promised!",
+  "Here’s what you asked for.",
+  "Delivered, just like that.",
+  "This one’s for you.",
+  "Voila!",
+  "Take a look at this!",
+  "Hot off the press!",
+  "Here’s the result!",
+  "Mission accomplished.",
+  "And… done!",
+  "Right on cue.",
+  "Here’s the magic.",
+  "Freshly generated for you.",
+  "Wrapped and ready!"
+];
+
+
+async function callMyAI(prompt) {
+    const response = await fetch("/api/hug", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server error:", errorText);
+        return {error:errorText,message:"Sorry, something's wrong with my AI."};
+    }
+
+    const data = await response.json();
+    console.log("AI response:", data.message);
+    return data;
+}
+
+function mistralCheckDraft(element){
+    const type = element.attr('contentType');
+    let textarea = element.attr('textarea');
+    let id = element.attr('id');
+    let draft = $('#'+textarea).val().trim();
+    let selector = '#'+id;
+    let message = "Hey hey.";
+    if(draft.length == 0){
+        message = `Need help getting started with <b>${type}</b>? Just type the key points into the text area and we can work something out!`;
+    }else if(draft.length < 200){
+        message = mistral_inputTooShort[getRandomIndex(mistral_inputTooShort)] + ` Let's make it at least 200 characters long.
+            <div class="d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Lengthen</button>
+            </div>`;
+    }else if(draft.length > 1900){
+        message = mistral_inputTooLong[getRandomIndex(mistral_inputTooLong)] + ` Let's make it less than 1900 characters long.
+            <div class="d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Shorten</button>
+            </div>`;
+    }else{
+        message = `${mistral_improvements[getRandomIndex(mistral_improvements)]}
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="d-flex flex-column align-items-center justify-content-center mx-1">
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Shorten</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Lengthen</button>
+                </div>
+                <div class="d-flex flex-column align-items-center justify-content-center mx-1">
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Clean up</button>
+                    <button type="button" class="btn btn-primary m-1 w-100 mistral-improve-draft" trigger="${selector}" textarea="${textarea}" contenttype="${type}">Rephrase</button>
+                </div>
+            </div>`;
+    }
+    callTippy(selector, message,"right")
+}
+async function mistralImproveDraft(textarea,intent,draft,type,trigger){
+    let instructions=[];
+    let lengthInstruction = "";
+    const holdOn = mistral_holdOn[getRandomIndex(mistral_holdOn)];
+    callTippy(trigger,holdOn,"right");
+    switch (intent) {
+        case "Shorten":
+            lengthInstruction = "The new draft must be AT LEAST 200 characters long";
+            break;
+        case "Lengthen":
+            lengthInstruction = "The new draft must be NO MORE THAN 1900 characters long";
+            break;
+        default:
+            lengthInstruction = "The new draft must be BETWEEN 200 and 1900 characters long";
+            break;
+    }
+    instructions.push(`You are helping improve a professional entry for: ${type}.`);
+    instructions.push(`DO NOT include a character count in your response or a puppy dies.`);
+    instructions.push(`Here is the current draft:"""${draft}"""`);
+    instructions.push(`Please ${intent.toLowerCase()} the draft.`);
+    instructions.push(`${lengthInstruction}, including all symbols and spaces.`);
+    instructions.push(`Do not exceed this limit.`);
+    instructions.push(`DO NOT include a character count in your response or a kitten dies.`);
+    instructions.push(`Only respond with the revised draft.`);
+    instructions.push(`Strictly use paragraphs only. Do not use bullet points.`);
+    instructions.push(`Do not add a title.`)
+    const prompt = instructions.join(' ');
+
+    let response = await callMyAI(prompt);
+    if (!response.error) {
+        let cleanOutput = cleanMistralOutput(response.message.trim());
+
+        let tries = 0;
+        while ((cleanOutput.length > 1900 || cleanOutput.length < 200) && tries < 3) {
+            response = await callMyAI(prompt);
+            if (response.error) {
+                callTippy(trigger, response.message, "right");
+                return;
+            }
+            cleanOutput = cleanMistralOutput(response.message.trim());
+            tries++;
+        }
+
+        textarea.val(cleanOutput);
+        const doneMessage = mistral_allDone[getRandomIndex(mistral_allDone)];
+        callTippy(trigger, doneMessage, "right");
+        textarea.next('.text-count').text(`${cleanOutput.length} characters`);
+    } else {
+        callTippy(trigger, response.message, "right");
+    }
+
+}
+function cleanMistralOutput(text) {
+  return text
+    // Matches: (1900 characters), (Exactly 1900 characters), (200-1900 characters), etc.
+    .replace(/\(\s*(exactly|approximately|approx\.?|about|around)?\s*\d{1,3}(?:,\d{3})*(\s*[-–]\s*\d{1,3}(?:,\d{3})*)?\s*characters?\s*\)/gi, '')
+    // Character count: 1234
+    .replace(/character count\s*:\s*\d{1,3}(?:,\d{3})*/gi, '')
+    // Total: 1,234 characters
+    .replace(/total\s*:\s*\d{1,3}(?:,\d{3})*\s*characters?/gi, '')
+    // Approx. 1234 chars, About 1,000 chars, etc.
+    .replace(/(exactly|approximately|approx\.?|about|around)?\s*\d{1,3}(?:,\d{3})*(\s*[-–]\s*\d{1,3}(?:,\d{3})*)?\s*chars?/gi, '')
+    // Collapse extra spaces
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+
+
 
 
 $(document).ready(function(){
@@ -211,43 +288,8 @@ $(document).ready(function(){
         let intent = $(this).text();
         let draft = textarea.val().trim();
         let type = $(this).attr('contenttype');
-        let lengthInstruction = "";
         let trigger = $(this).attr('trigger');
-        let instructions=[];
-        const holdOn = mistral_holdOn[getRandomIndex(mistral_holdOn)];
-        callTippy(trigger,holdOn,"right");
-        switch (intent) {
-            case "Shorten":
-                lengthInstruction = "The new draft must be AT LEAST 200 characters long";
-                break;
-            case "Lengthen":
-                lengthInstruction = "The new draft must be NO MORE THAN 1900 characters long";
-                break;
-            default:
-                lengthInstruction = "The new draft must be BETWEEN 200 and 1900 characters long";
-                break;
-        }
-        instructions.push(`You are helping improve a professional entry for: ${type}.`);
-        instructions.push(`DO NOT include a character count in your response or a puppy dies.`);
-        instructions.push(`Here is the current draft:"""${draft}"""`);
-        instructions.push(`Please ${intent.toLowerCase()} the draft.`);
-        instructions.push(`${lengthInstruction}, including all symbols and spaces.`);
-        instructions.push(`Do not exceed this limit.`);
-        instructions.push(`DO NOT include a character count in your response or a kitten dies.`);
-        instructions.push(`Only respond with the revised draft.`);
-        instructions.push(`Strictly use paragraphs only. Do not use bullet points.`);
-        instructions.push(`Do not add a title.`)
-        const prompt = instructions.join(' ');
-
-        let response = await callMyAI(prompt);
-        if(!response.error){
-            let cleanOutput = cleanMistralOutput(response.message.trim());
-            textarea.val(cleanOutput)
-            callTippy(trigger,"Let me know if you like it!","right")
-            textarea.next('.text-count').text(cleanOutput.length+" characters")
-        }else{
-            callTippy(trigger,response.message,"right")
-        }
+        mistralImproveDraft(textarea,intent,draft,type,trigger)
         
     })
 
