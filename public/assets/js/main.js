@@ -835,7 +835,7 @@ $(document).ready(function() {
         } else {
             $(this)[0].setCustomValidity("");
             $('#otherTypeOfWorkContainer').hide();
-            $('#otherTypeOfWorkInput').removeProp('required').removeAttr('aria-required');
+            $('#otherTypeOfWorkInput').removeProp('required').removeAttr('aria-required').removeAttr('required');
         }
     })
     .on('change','#updateTypeOfWork',function() {
@@ -849,7 +849,7 @@ $(document).ready(function() {
         } else {
             $(this)[0].setCustomValidity("");
             $('#updateOtherTypeOfWorkContainer').hide();
-            $('#updateOtherTypeOfWorkInput').removeProp('required').removeAttr('aria-required');
+            $('#updateOtherTypeOfWorkInput').removeProp('required').removeAttr('aria-required').removeAttr('required');
         }
     })
     .on('change','#uniquenessTickbox',function() {
@@ -1173,7 +1173,8 @@ $(document).ready(function() {
             setCurrentMonth(); // Reset the month dropdown to the current month
             $('#uniquenessInput').hide().removeProp('required').removeAttr('aria-required').removeAttr('required');
             updateFileInput([],'recipientImages'); // Clear the file input's FileList
-            $('#otherTypeOfWorkInput').hide().removeProp('required').removeAttr('aria-required').removeAttr('required');
+            $('#otherTypeOfWorkContainer').hide()
+            $('#otherTypeOfWorkInput').removeProp('required').removeAttr('aria-required').removeAttr('required');
         }).catch((error) => {
             console.error("Error saving to SharePoint:", error);
             showModal("Error", "An error occurred while submitting the entry. Please try again.");
