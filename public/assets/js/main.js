@@ -825,6 +825,8 @@ $(document).ready(function() {
         });
     })
     .on('change','#typeOfWork',function() {
+        console.log("type of work: ",$('#typeOfWork').val())
+        
         if ($(this).val() === 'others') {
             $('#otherTypeOfWorkInput').show().prop('required', true).attr('aria-required', 'true');
             $('#otherTypeOfWorkInput').focus();
