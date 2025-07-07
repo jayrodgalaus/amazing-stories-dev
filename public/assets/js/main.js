@@ -826,26 +826,30 @@ $(document).ready(function() {
     })
     .on('change','#typeOfWork',function() {        
         if ($(this).val() === 'others') {
-            $('#otherTypeOfWorkInput').show().prop('required', true).attr('aria-required', 'true');
+            $('#otherTypeOfWorkContainer').show();
+            $('#otherTypeOfWorkInput').prop('required', true).attr('aria-required', 'true');
             $('#otherTypeOfWorkInput').focus();
             $(this)[0].setCustomValidity("");
         }else if($(this).val() === ""){
             $(this)[0].setCustomValidity("Please select a valid option.");                
         } else {
             $(this)[0].setCustomValidity("");
-            $('#otherTypeOfWorkInput').hide().removeProp('required').removeAttr('aria-required');
+            $('#otherTypeOfWorkContainer').hide();
+            $('#otherTypeOfWorkInput').removeProp('required').removeAttr('aria-required');
         }
     })
     .on('change','#updateTypeOfWork',function() {
         if ($(this).val() === 'others') {
-            $('#updateOtherTypeOfWorkInput').show().prop('required', true).attr('aria-required', 'true');
+            $('#updateOtherTypeOfWorkContainer').show();
+            $('#updateOtherTypeOfWorkInput').prop('required', true).attr('aria-required', 'true');
             $('#updateOtherTypeOfWorkInput').focus();
             $(this)[0].setCustomValidity("");
         }else if($(this).val() === ""){
             $(this)[0].setCustomValidity("Please select a valid option.");                
         } else {
             $(this)[0].setCustomValidity("");
-            $('#updateOtherTypeOfWorkInput').hide().removeProp('required').removeAttr('aria-required');
+            $('#updateOtherTypeOfWorkContainer').hide();
+            $('#updateOtherTypeOfWorkInput').removeProp('required').removeAttr('aria-required');
         }
     })
     .on('change','#uniquenessTickbox',function() {
