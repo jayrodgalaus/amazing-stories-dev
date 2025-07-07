@@ -1055,7 +1055,6 @@ $(document).ready(function() {
         $('.mistral-button[textarea='+id+']').addClass('active');
     })
     .on('submit','#newEntryForm', async function(e){
-        console.log("type of work: ",$('#typeOfWork').val())
         e.preventDefault();
         if($('#accountDropdown').val() == ""){
             $('#accountDropdown').setCustomValidity("Please select a valid option.");
@@ -1318,7 +1317,8 @@ $(document).ready(function() {
             $('#updatePreviewContainer').empty(); // Clear the preview container
             $('#updateRecipientImages').val(""); // Clear the file input
             $('#updateOtherAccountInput').hide().removeProp('required').removeAttr('aria-required').removeAttr('required');
-            $('#updateOtherTypeOfWorkInput').hide().removeProp('required').removeAttr('aria-required').removeAttr('required');
+            $('#updateOtherTypeOfWorkInput').removeProp('required').removeAttr('aria-required').removeAttr('required');
+            $('#updateOtherTypeOfWorkContainer').hide()
             $('#updateUniquenessInput').hide().removeProp('required').removeAttr('aria-required').removeAttr('required');
             updateFileInput([],'updateRecipientImages'); // Clear the file input's FileList
             $('#attachmentsToDelete').val("[]");
@@ -1499,10 +1499,12 @@ $(document).ready(function() {
         //check if worktype is others
         if($('#updateTypeOfWork option[value="'+worktype+'"]').length > 0){
             $('#updateTypeOfWork').val(worktype);
-            $('#updateOtherTypeOfWorkInput').hide().removeProp('required').removeAttr('aria-required').val('');
+            $('#updateOtherTypeOfWorkContainer').hide();
+            $('#updateOtherTypeOfWorkInput').removeProp('required').removeAttr('aria-required').removeAttr('required').val('');
         }else {
             $('#updateTypeOfWork').val('others');
-            $('#updateOtherTypeOfWorkInput').show().prop('required', true).attr('aria-required', 'true').val(worktype);
+            $('#updateOtherTypeOfWorkContainer').show();
+            $('#updateOtherTypeOfWorkInput').prop('required', true).attr('aria-required', 'true').val(worktype);
         }
             
         $('#updateBusinessChallengeInput').val(challenge);
