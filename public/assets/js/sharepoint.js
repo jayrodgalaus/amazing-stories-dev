@@ -144,7 +144,7 @@ async function userLevel(){
             if(processedItems.length > 0){
                 let user = processedItems[0];
                 defaultaccess.subsl = user.SUBSL.Title;
-                if(defaultaccess.subsl == 'GIS'){
+                if(defaultaccess.subsl == 'GIS' || defaultaccess.subsl == 'C&I'){
                     defaultaccess.type = 1; // Super Admin
                     $('.super-element').removeClass("d-none");
                 }else {
