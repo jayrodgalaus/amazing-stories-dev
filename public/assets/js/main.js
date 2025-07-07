@@ -1052,6 +1052,7 @@ $(document).ready(function() {
     })
     .on('submit','#newEntryForm', async function(e){
         e.preventDefault();
+        console.log("type of work: ",$('#typeOfWork').val())
         if($('#accountDropdown').val() === ""){
             $('#accountDropdown').setCustomValidity("Please select a valid option.");
             $('#accountDropdown').focus();
