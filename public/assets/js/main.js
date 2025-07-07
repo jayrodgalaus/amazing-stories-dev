@@ -824,9 +824,7 @@ $(document).ready(function() {
             }
         });
     })
-    .on('change','#typeOfWork',function() {
-        console.log("type of work: ",$('#typeOfWork').val())
-        
+    .on('change','#typeOfWork',function() {        
         if ($(this).val() === 'others') {
             $('#otherTypeOfWorkInput').show().prop('required', true).attr('aria-required', 'true');
             $('#otherTypeOfWorkInput').focus();
@@ -1053,19 +1051,22 @@ $(document).ready(function() {
         $('.mistral-button[textarea='+id+']').addClass('active');
     })
     .on('submit','#newEntryForm', async function(e){
-        e.preventDefault();
         console.log("type of work: ",$('#typeOfWork').val())
-        if($('#accountDropdown').val() === ""){
+        e.preventDefault();
+        if($('#accountDropdown').val() == ""){
             $('#accountDropdown').setCustomValidity("Please select a valid option.");
             $('#accountDropdown').focus();
+            console.log("account dropdown value == empty");
             return false;
-        }else if ($('#subslDropdown').val() === ""){
+        }else if ($('#subslDropdown').val() == ""){
             $('#subslDropdown').setCustomValidity("Please select a valid option.");
             $('#subslDropdown').focus();
+            console.log("subslDropdown value == empty");
             return false;
-        }else if ($('#typeOfWork').val() === ""){
+        }else if ($('#typeOfWork').val() == ""){
             $('#typeOfWork').setCustomValidity("Please select a valid option.");
             $('#typeOfWork').focus();
+            console.log("typeOfWork value == empty");
             return false;
         }
         let submit = $(this).find('button[type="submit"]');
