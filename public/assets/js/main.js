@@ -506,6 +506,7 @@ async function processListItems(items,month, sort = 0) {
             html += `<div class="card entry-card my-1 ${category} position-relative entry-preview" data-id="${item.Id}">`
             
             html+=`<div class="card-body">
+                    <button type="button" title="Select" data-id="" class="select-entry-button me-2"><i class="fa-regular fa-square"></i></button>
                     <div style="max-width: 75%;">
                         <span class="lead" entry-id="${item.Id}" style="cursor: pointer">${item.Title}</span><br>
                         <span><b>${item.SUBSL}</b> | ${item.Account}`;

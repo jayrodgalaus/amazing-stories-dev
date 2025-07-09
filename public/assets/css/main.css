@@ -231,7 +231,7 @@
     margin-left:auto;
     /* padding-right: 30pt; */
 }
-.entry-actions button, .otherRecipientBtn, .updateOtherRecipientBtn {
+.entry-actions button, .otherRecipientBtn, .updateOtherRecipientBtn, .select-entry-button {
     width: 40px;
     height: 40px;
     display: flex;
