@@ -240,7 +240,7 @@
     font-size: 15pt;
     border: none!important;
     border-radius: 50% !important;
-    background-color: transparent !important;
+    background-color: transparent;
     padding: 0 !important;
     text-align: center;
     color: var(--bs-tertiary-color);
@@ -248,6 +248,12 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+}
+.otherRecipientBtn, .updateOtherRecipientBtn{
+    background-color: transparent !important;
+}
+.entry-actions button:hover,  .select-entry-button:hover{
+    background-color: #e2e3e5 !important;
 }
 .entry-card.Amplified .entry-actions button{
     color: rgb(226, 226, 226) !important;
