@@ -34,7 +34,7 @@ async function init(){
         //check access level
         authorId = await getUserDetailsFromEmail(email);
         access = await userLevel();
-        // dummydata();
+        dummydata();
         
     }
     $('#home-page').css('opacity', '1');

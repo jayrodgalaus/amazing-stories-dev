@@ -74,8 +74,11 @@ function getRandomString(length) {
 }
 
 function dummydata() {
-    $('#teamInput').val("Dummy Team");
     $('#entryInput').val("Dummy Entry");
+    $('#subslDropdown').val("AMS-EU");
+    $('#accountDropdown').val("Airbus");
+    $('#teamInput').val("Dummy Team");
+    $('#typeOfWork').val("Backup");
     let pill = `<div class="recipientPill bg-secondary-subtle px-2" value="mohamed.awaad@dxc.com" name="Awaad, Mohamed (DXC Luxoft)">Awaad, Mohamed (DXC Luxoft)<button class="removeRecipient" type="button"><i class="fa-solid fa-xmark"></i></button></div>`;
     $('#recipientContainer').html(pill);
     $('#recognitionInput1').attr('checked', true).prop('checked', true);
