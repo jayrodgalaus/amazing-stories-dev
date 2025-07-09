@@ -257,7 +257,7 @@
     background-color: #f1f1f1 !important;
 }
 .entry-card.Amplified .entry-actions button{
-    color: rgb(226, 226, 226) !important;
+    /* color: rgb(226, 226, 226) !important; */
 }
 #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover, .info-button:hover, .mistral-button:hover{
     color: var(--bs-btn-bg);
