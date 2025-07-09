@@ -253,6 +253,7 @@
     background-color: transparent !important;
 }
 .entry-actions button:hover,  .select-entry-button:hover{
+    color: var(--bs-btn-bg);
     background-color: #f1f1f1 !important;
 }
 .entry-card.Amplified .entry-actions button{
@@ -263,7 +264,7 @@
     transform: scale(1.1);
 }
 .entry-card.Amplified .entry-actions button:hover{
-    color: white !important;
+    /* color: white !important; */
 }
 .entry-actions button:focus, button.help-btn:focus, button.otherRecipientBtn:focus, button.updateOtherRecipientBtn:focus, .info-button:focus, .mistral-button:focus{
     outline: none !important;
