@@ -855,9 +855,11 @@ $(document).ready(function() {
     .on('change','#uniquenessTickbox',function() {
         if ($(this).is(':checked')) {
             $('#uniquenessInput').show().prop('required', true).attr('aria-required', 'true');
+            $('#uniquenessInput').next('.text-count').show();
             $('#uniquenessInput').focus();
         } else {
             $('#uniquenessInput').hide().removeProp('required').removeAttr('aria-required').removeAttr('required');
+            $('#uniquenessInput').next('.text-count').hide();
         }
     })
     .on('change','#updateUniquenessTickbox',function() {
@@ -1109,13 +1111,6 @@ $(document).ready(function() {
         
         if (recipientImages.length > 0) {
             // Iterate through each uploaded file
-            /* Array.from(recipientImages).forEach(file => {
-                file.name = file.name+getRandomString(5);
-                attachments.push(file); // Add each file to the attachments array
-                console.log(`File added: ${file.name} (${file.type}, ${file.size} bytes)`);
-            }); 
-            imageData.append("images", recipientImages);
-            */
             let imageData = new FormData();
             Array.from(recipientImages).forEach(file => {
                 let fileName = file.name.split(".")[0];  // "cat2"
@@ -1162,7 +1157,6 @@ $(document).ready(function() {
         if(access.type != 3){
             data["Classification"] = $('#classificationSelect').val();
         }
-        console.log(data);
         saveToSharePoint(splist, data, attachments).then(()=>{
             showModal("Success", "Entry submitted successfully.");
             $('#newEntryForm')[0].reset(); // Reset the form fields
@@ -1171,6 +1165,7 @@ $(document).ready(function() {
             $('#recipientImages').val(""); // Clear the file input
             setCurrentMonth(); // Reset the month dropdown to the current month
             $('#uniquenessInput').hide().removeProp('required').removeAttr('aria-required').removeAttr('required');
+            $('#uniquenessInput').next('.text-count').hide();
             updateFileInput([],'recipientImages'); // Clear the file input's FileList
             $('#otherTypeOfWorkContainer').hide()
             $('#otherTypeOfWorkInput').removeProp('required').removeAttr('aria-required').removeAttr('required');
