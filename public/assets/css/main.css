@@ -361,7 +361,14 @@ button.otherRecipientBtn.clicked, button.updateOtherRecipientBtn.clicked{
     height: 30px;
     width: 30px;
 }
-.mistral-button > img{
+.mistral-button .mistral-icon{
     width: 100%;
     height: 100%;
+}
+.mistral-button .mistral-sparkles{
+    position: absolute;
+    top: -8%;
+    left: -20%;
+    height: 60%;
+    width: 60%;
 }
