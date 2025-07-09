@@ -254,7 +254,7 @@
 }
 .entry-actions button:hover,  .select-entry-button:hover{
     color: var(--bs-btn-bg);
-    background-color: #f1f1f1 !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
 }
 .entry-card.Amplified .entry-actions button{
     /* color: rgb(226, 226, 226) !important; */
