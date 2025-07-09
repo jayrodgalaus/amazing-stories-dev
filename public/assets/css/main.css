@@ -235,7 +235,7 @@
     width: 40px;
     height: 40px;
     display: flex;
-    box-shadow: 0.2rem 0.2rem 0.4rem 0.1rem rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0.2rem 0.2rem 0.4rem 0.1rem rgba(0, 0, 0, 0.15); */
     /* margin-left: 0.5em; */
     font-size: 15pt;
     border: none!important;
@@ -253,12 +253,12 @@
     background-color: transparent !important;
 }
 .entry-actions button:hover,  .select-entry-button:hover{
-    background-color: #e8e8e8 !important;
+    background-color: #f1f1f1 !important;
 }
 .entry-card.Amplified .entry-actions button{
     color: rgb(226, 226, 226) !important;
 }
-.entry-actions button:hover, #entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover, .info-button:hover, .mistral-button:hover{
+#entryInfoActions button:hover, button.help-btn:hover, button.otherRecipientBtn:hover, button.updateOtherRecipientBtn:hover, .info-button:hover, .mistral-button:hover{
     color: var(--bs-btn-bg);
     transform: scale(1.1);
 }
