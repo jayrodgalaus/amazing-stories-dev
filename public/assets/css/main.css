@@ -207,7 +207,7 @@
     transition: all 0.2s ease-in-out;
 }
 .entry-card:hover{
-    transform: scale(1.01);
+    outline: 2px solid #5F249F;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 .entry-card.Amplified{
