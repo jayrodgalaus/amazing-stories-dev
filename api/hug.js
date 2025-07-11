@@ -5,27 +5,22 @@ export default async function handler(req, res) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.CLAUDE_API_KEY}`,//`Bearer ${process.env.MISTRAL_API_KEY}`,
+        "Authorization": `Bearer ${process.env.HERMES_API_KEY}`,//`Bearer ${process.env.MISTRAL_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "anthropic/claude-3.7-sonnet",//"mistralai/mistral-7b-instruct:free",
+        model: "nousresearch/deephermes-3-llama-3-8b-preview:free",//"mistralai/mistral-7b-instruct:free",
         messages: [
           {
             role: "user",
-            content: /* prompt */[
-                {
-                    type: "text",
-                    text: prompt
-                }
-            ]
+            content: prompt
           }
         ]
       })
     });
 
     const data = await response.json();
-    const message = data || "No message returned";
+    const message = data.choices?.[0]?.message?.content || "No message returned";
 
     console.log("OpenRouter response:", message);
 
