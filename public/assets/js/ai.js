@@ -134,6 +134,7 @@ const mistral_allDone = [
 
 
 async function callMyAI(prompt) {
+    console.log("Calling AI with prompt:", prompt);
     const response = await fetch("/api/hug", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

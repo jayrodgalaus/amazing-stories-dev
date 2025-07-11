@@ -5,15 +5,20 @@ export default async function handler(req, res) {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.MISTRAL_API_KEY}`,
+        "Authorization": `Bearer ${process.env.CLAUDE_API_KEY}`,//`Bearer ${process.env.MISTRAL_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct:free",
+        model: "anthropic/claude-3.7-sonnet",//"mistralai/mistral-7b-instruct:free",
         messages: [
           {
             role: "user",
-            content: prompt
+            content: /* prompt */[
+                {
+                    type: "text",
+                    text: prompt
+                }
+            ]
           }
         ]
       })
@@ -31,3 +36,4 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Mistral AI request failed", details: error.message });
   }
 }
+
