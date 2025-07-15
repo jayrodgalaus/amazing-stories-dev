@@ -506,7 +506,7 @@ async function processListItems(items,month, sort = 0) {
             html += `<div class="card entry-card my-1 ${category} position-relative entry-preview" data-id="${item.Id}">`
             
             html+=`<div class="card-body">
-                    <button type="button" title="Select" data-id="" class="select-entry-button me-2"><i class="fa-regular fa-square"></i></button>
+                    <button type="button" title="Select" entry-id="${item.Id}" class="select-entry-button me-2" is-selected="0"><i class="fa-regular fa-square"></i></button>
                     <div style="max-width: 75%;">
                         <span class="lead" entry-id="${item.Id}" style="cursor: pointer">${item.Title}</span><br>
                         <span><b>${item.SUBSL}</b> | ${item.Account}`;
@@ -1370,6 +1370,17 @@ $(document).ready(function() {
         filterEntryList(month,filter);
         $('#entryPreviewPlaceholder').removeClass('d-none');
         $('#entryPreview').addClass('d-none');
+    })
+    .on('click','.select-entry-button', function(){
+        let entryId = $(this).attr('entry-id');
+        let isSelected = $(this).attr('is-selected');
+        if(isSelected == "0"){
+            $(this).attr('is-selected', '1');
+            $(this).find('i').removeClass('fa-regular fa-square').addClass('fa-solid fa-square-check');
+        }else{
+            $(this).attr('is-selected', '0');
+            $(this).find('i').removeClass('fa-solid fa-square-check').addClass('fa-regular fa-square');
+        }
     })
     .on('click','.entry-view', async function(){
         $('#entryInfoCard').hide();
