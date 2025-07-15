@@ -1374,6 +1374,7 @@ $(document).ready(function() {
     .on('click','.select-entry-button', function(){
         let entryId = $(this).attr('entry-id');
         let isSelected = $(this).attr('is-selected');
+        selectedEntries = [];
         if(isSelected == "0"){
             $(this).attr('is-selected', '1');
             $(this).find('i').removeClass('fa-regular fa-square').addClass('fa-solid fa-square-check');
@@ -1381,6 +1382,13 @@ $(document).ready(function() {
             $(this).attr('is-selected', '0');
             $(this).find('i').removeClass('fa-solid fa-square-check').addClass('fa-regular fa-square');
         }
+        $('.select-entry-button[is-selected="1"]').each(function(){
+            let id=$(this).attr('entry-id');
+            selectedEntries.push(spItems[id]);
+            
+        });
+
+        $('#selectedEntriesCount').text(selectedEntries.length);
     })
     .on('click','.entry-view', async function(){
         $('#entryInfoCard').hide();

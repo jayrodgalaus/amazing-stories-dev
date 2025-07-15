@@ -756,6 +756,15 @@
                     </div>
                 </div>
             </div> 
+            <div class="row">
+                <div class="col d-flex">
+                    <div><span id="selectedEntriesCount">0</span> entries selected</div>
+                    <div class="ms-auto">
+                        <button class="btn btn-primary" id="generateSlidesBtn">Generate Slides</button>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
         </div>
     </div>
     <div class="offcanvas offcanvas-end vw-100" tabindex="-1" id="dashboardCanvas" aria-labelledby="dashboardCanvas">
@@ -1117,7 +1126,7 @@
         const splist = "Amazing Stories entries dev";
         var spItems = [];
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        
+        var selectedEntries = [];
     </script>
     <script src="assets/jquery/jquery-3.7.1.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
