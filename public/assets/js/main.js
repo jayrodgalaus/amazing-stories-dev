@@ -63,7 +63,7 @@ function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js')
-            .then(reg => console.log('Service Worker registered:', reg))
+            .then(reg => console.log('Service Worker registered:'))
             .catch(err => console.error('Service Worker registration failed:', err));
         });
     }
@@ -74,6 +74,10 @@ function checkIfInstalled(){
     window.navigator.standalone === true; // for iOS
     if (isStandalone) {
         $('#installBtn').hide(); // or .remove()
+        $(window).on('contextmenu', function (e) {
+            e.preventDefault();
+            console.log("Right-click disabled (jQuery)");
+        });
         console.log("This is the standalone app");
     }
 }
@@ -607,13 +611,18 @@ $(document).ready(function() {
         
         $('#installBtn').show();    // Reveal install button
         console.log("This is installable");
-        
     })
     .on('appinstalled', function () {
         console.log('App installed successfully');
         localStorage.setItem('isInstalled', 'true');
         $('#installBtn').hide();
-    });
+    })
+    .on('contextmenu', function (e) {
+        e.preventDefault();
+        console.log("Right-click disabled");
+    })
+    
+    
     $(document)
     .on('click','#sendPrompt',function(){
         let text = $('#AIPrompt').val();
