@@ -594,8 +594,11 @@ $(document).ready(function() {
     init();
     $(window).on('beforeinstallprompt', function (e) {
         e.preventDefault();         // Prevent automatic prompt
-        deferredPrompt = e;         // Save the event
+        deferredPrompt = e.originalEvent;         // Save the event
         $('#installBtn').show();    // Reveal install button
+        console.log(deferredPrompt);
+        console.log(typeof deferredPrompt.prompt); // Should be 'function'
+    
     });
     $(document)
     .on('click','#sendPrompt',function(){
