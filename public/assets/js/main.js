@@ -53,7 +53,7 @@ async function init(){
         authorId = await getUserDetailsFromEmail(email);
         access = await userLevel();
         dummydata();
-        
+        $('#installBtn').hide(); 
     }
 
     $('#home-page').css('opacity', '1');
@@ -67,10 +67,6 @@ function registerServiceWorker() {
             .catch(err => console.error('Service Worker registration failed:', err));
         });
     }
-}
-
-function asd() {
-    
 }
 
 //ADD ENTRY FUNCTIONS
