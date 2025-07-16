@@ -2,6 +2,8 @@
     "name": "C&I PH Amazing Stories",
     "short_name": "Amazing Stories",
     "start_url": "/",
+    "id": "/",
+    "lang": "en-US",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
