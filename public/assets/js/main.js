@@ -617,10 +617,10 @@ $(document).ready(function() {
         localStorage.setItem('isInstalled', 'true');
         $('#installBtn').hide();
     })
-    .on('contextmenu', function (e) {
-        e.preventDefault();
-        console.log("Right-click disabled");
-    })
+    // .on('contextmenu', function (e) {
+    //     e.preventDefault();
+    //     console.log("Right-click disabled");
+    // })
     
     
     $(document)
