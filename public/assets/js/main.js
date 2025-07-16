@@ -53,7 +53,7 @@ async function init(){
         authorId = await getUserDetailsFromEmail(email);
         access = await userLevel();
         dummydata();
-        $('#installBtn').hide(); 
+        
     }
 
     $('#home-page').css('opacity', '1');
@@ -595,10 +595,15 @@ $(document).ready(function() {
     $(window).on('beforeinstallprompt', function (e) {
         e.preventDefault();         // Prevent automatic prompt
         deferredPrompt = e.originalEvent;         // Save the event
-        $('#installBtn').show();    // Reveal install button
-        console.log(deferredPrompt);
-        console.log(typeof deferredPrompt.prompt); // Should be 'function'
-    
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true; // for iOS
+        if (isStandalone) {
+            $('#installBtn').hide(); // or .remove()
+            console.log("This is the standalone app");
+        }else {
+            $('#installBtn').show();    // Reveal install button
+            console.log("This is installable");
+        }
     });
     $(document)
     .on('click','#sendPrompt',function(){
