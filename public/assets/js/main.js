@@ -48,7 +48,7 @@ async function init(){
         addFormValidation();
         // embedPowerBIReport();
         registerServiceWorker();
-
+        checkIfInstalled();
         //check access level
         authorId = await getUserDetailsFromEmail(email);
         access = await userLevel();
@@ -66,6 +66,18 @@ function registerServiceWorker() {
             .then(reg => console.log('Service Worker registered:', reg))
             .catch(err => console.error('Service Worker registration failed:', err));
         });
+    }
+}
+
+function checkIfInstalled(){
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true; // for iOS
+    if (isStandalone) {
+        $('#installBtn').hide(); // or .remove()
+        console.log("This is the standalone app");
+    }else {
+        $('#installBtn').show();    // Reveal install button
+        console.log("This is installable");
     }
 }
 
@@ -595,17 +607,12 @@ $(document).ready(function() {
     $(window).on('beforeinstallprompt', function (e) {
         e.preventDefault();         // Prevent automatic prompt
         deferredPrompt = e.originalEvent;         // Save the event
-        const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-        window.navigator.standalone === true; // for iOS
-        if (isStandalone) {
-            $('#installBtn').hide(); // or .remove()
-            console.log("This is the standalone app");
-        }else {
-            $('#installBtn').show();    // Reveal install button
-            console.log("This is installable");
-        }
+        
+        // $('#installBtn').show();    // Reveal install button
+        console.log("This is installable");
+        
     })
-    .on('appinstalled', function (e) {
+    .on('appinstalled', function () {
         console.log('App installed successfully');
         $('#installBtn').hide();
     });
