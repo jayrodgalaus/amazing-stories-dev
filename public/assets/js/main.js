@@ -13,6 +13,7 @@ const splist = "Amazing Stories entries dev";
 var spItems = [];
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var selectedEntries = [];
+var deferredPrompt;
 
 async function init(){
     setCurrentMonth();
@@ -46,6 +47,7 @@ async function init(){
         getSiteAndDriveDetails();
         addFormValidation();
         // embedPowerBIReport();
+        registerServiceWorker();
 
         //check access level
         authorId = await getUserDetailsFromEmail(email);
@@ -53,6 +55,11 @@ async function init(){
         dummydata();
         
     }
+
+    $('#home-page').css('opacity', '1');
+}
+//PWA Functions
+function registerServiceWorker() {    
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/sw.js')
@@ -60,9 +67,12 @@ async function init(){
             .catch(err => console.error('Service Worker registration failed:', err));
         });
     }
-
-    $('#home-page').css('opacity', '1');
 }
+
+function asd() {
+    
+}
+
 //ADD ENTRY FUNCTIONS
 function setCurrentMonth() {
     // Get the current month index (0 for January, 1 for February, etc.)
@@ -586,6 +596,11 @@ function embedPowerBIReport() {
 // EVENTS
 $(document).ready(function() {
     init();
+    $(window).on('beforeinstallprompt', function (e) {
+        e.preventDefault();         // Prevent automatic prompt
+        deferredPrompt = e;         // Save the event
+        $('#installBtn').show();    // Reveal install button
+    });
     $(document)
     .on('click','#sendPrompt',function(){
         let text = $('#AIPrompt').val();
@@ -1637,5 +1652,14 @@ $(document).ready(function() {
         console.log("Generating presentation for entry ID:", attrid);
         createPresentation(spItems[attrid]);
     })
-    
+    .on('click','#installBtn', async function () {
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt();    // Show the install prompt
+        const choiceResult = await deferredPrompt.userChoice;
+        console.log('User response:', choiceResult.outcome);
+
+        deferredPrompt = null;      // Clear the stored prompt
+
+    })
 });
