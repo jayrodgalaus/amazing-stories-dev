@@ -604,6 +604,10 @@ $(document).ready(function() {
             $('#installBtn').show();    // Reveal install button
             console.log("This is installable");
         }
+    })
+    .on('appinstalled', function (e) {
+        console.log('App installed successfully');
+        $('#installBtn').hide();
     });
     $(document)
     .on('click','#sendPrompt',function(){
