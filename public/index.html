@@ -15,6 +15,17 @@
     <script src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/powerbi-client/dist/powerbi.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+    <script src="assets/jquery/jquery-3.7.1.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/msal.js"></script>
+    <script src="assets/js/graph.js"></script>
+    <script src="assets/js/sharepoint.js"></script>
+    <script src="assets/js/utilities.js"></script>
+    <script src="assets/js/pptgen.js"></script>
+    <script src="assets/js/ai.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
 </head>
 <body>
     <!-- Modals -->  
@@ -1111,44 +1122,8 @@
         </div>
     </div>
     
-    <script>
-        const msalConfig = {
-            auth: {
-                clientId: "2211ce0f-1187-409a-9c1d-baf8a0dd577f", // Replace with your client ID
-                authority: "https://login.microsoftonline.com/93f33571-550f-43cf-b09f-cd331338d086", // Replace with your tenant ID
-                redirectUri: "https://amazing-stories-dev.vercel.app/" // Replace with your redirect URI
-            }
-
-        };
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
-        var siteId, driveId, tokenResponse;
-        var authorId, accountName, email, access;
-        const splist = "Amazing Stories entries dev";
-        var spItems = [];
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var selectedEntries = [];
-    </script>
-    <script src="assets/jquery/jquery-3.7.1.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/msal.js"></script>
-    <script src="assets/js/graph.js"></script>
-    <script src="assets/js/sharepoint.js"></script>
-    <script src="assets/js/utilities.js"></script>
-    <script src="assets/js/pptgen.js"></script>
-    <script src="assets/js/ai.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://unpkg.com/tippy.js@6"></script>
-    <script>
-        $(document).ready(function() {
-            $(document)
-            
-        });
-        
-
-       
     
-    </script>
+    
 
 </body>
 </html>

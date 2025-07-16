@@ -1,3 +1,19 @@
+const msalConfig = {
+    auth: {
+        clientId: "2211ce0f-1187-409a-9c1d-baf8a0dd577f", // Replace with your client ID
+        authority: "https://login.microsoftonline.com/93f33571-550f-43cf-b09f-cd331338d086", // Replace with your tenant ID
+        redirectUri: "https://amazing-stories-dev.vercel.app/" // Replace with your redirect URI
+    }
+
+};
+const msalInstance = new msal.PublicClientApplication(msalConfig);
+var siteId, driveId, tokenResponse;
+var authorId, accountName, email, access;
+const splist = "Amazing Stories entries dev";
+var spItems = [];
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var selectedEntries = [];
+
 async function init(){
     setCurrentMonth();
     const observer = new IntersectionObserver((entries, observer) => {
