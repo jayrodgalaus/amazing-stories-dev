@@ -75,9 +75,6 @@ function checkIfInstalled(){
     if (isStandalone) {
         $('#installBtn').hide(); // or .remove()
         console.log("This is the standalone app");
-    }else {
-        $('#installBtn').show();    // Reveal install button
-        console.log("This is installable");
     }
 }
 
@@ -608,12 +605,13 @@ $(document).ready(function() {
         e.preventDefault();         // Prevent automatic prompt
         deferredPrompt = e.originalEvent;         // Save the event
         
-        // $('#installBtn').show();    // Reveal install button
+        $('#installBtn').show();    // Reveal install button
         console.log("This is installable");
         
     })
     .on('appinstalled', function () {
         console.log('App installed successfully');
+        localStorage.setItem('isInstalled', 'true');
         $('#installBtn').hide();
     });
     $(document)
