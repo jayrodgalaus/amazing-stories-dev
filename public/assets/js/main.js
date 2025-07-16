@@ -53,6 +53,14 @@ async function init(){
         dummydata();
         
     }
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker registered:', reg))
+            .catch(err => console.error('Service Worker registration failed:', err));
+        });
+    }
+
     $('#home-page').css('opacity', '1');
 }
 //ADD ENTRY FUNCTIONS
