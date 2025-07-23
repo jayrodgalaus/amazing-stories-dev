@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     res.status(200).json({ message });
   } catch (error) {
     console.error("Fetch failed:", error);
-    res.status(500).json({ error: "Mistral AI request failed", details: error.message });
+    res.status(500).json({ error: "Hermes AI request failed", details: error.message });
   }
 }
 

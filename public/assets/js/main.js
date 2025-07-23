@@ -1233,7 +1233,7 @@ $(document).ready(function() {
             $('#otherTypeOfWorkInput').removeProp('required').removeAttr('aria-required').removeAttr('required');
         }).catch((error) => {
             console.error("Error saving to SharePoint:", error);
-            showModal("Error", "An error occurred while submitting the entry. Please try again.");
+            showModal("Error", `An error occurred while submitting the entry. Please try again. <hr><br>${error.message}`);
         })
 
         .finally(() => {
